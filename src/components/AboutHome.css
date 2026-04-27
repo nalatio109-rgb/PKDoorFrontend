@@ -1,0 +1,124 @@
+.about-home {
+  background-color: #fff;
+}
+
+.about-home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-home-content .subtitle {
+  color: var(--primary-red);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.about-home-content h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.about-home-content p {
+  color: #64748b;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.about-home-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 2.5rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--deep-dark);
+}
+
+.feature-icon {
+  color: var(--primary-blue);
+  background: var(--primary-blue-light);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-home-image {
+  position: relative;
+}
+
+.about-home-image img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+}
+
+.experience-badge {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 174, 239, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.experience-badge strong {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.experience-badge span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.btn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-red);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-more:hover {
+  gap: 15px;
+}
+
+@media (max-width: 992px) {
+  .about-home-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .about-home-image {
+    order: 2;
+    margin-top: 20px;
+  }
+  
+  .about-home-content {
+    order: 1;
+  }
+}

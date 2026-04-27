@@ -1,0 +1,62 @@
+:root {
+  /* PK DOOR Color Palette */
+  --primary-blue: #00AEEF;
+  /* Sky Blue */
+  --primary-red: #de372e;
+  /* Softened Red */
+  --primary-red-hover: #de372e;
+  --primary-blue-hover: #008CC1;
+  --primary-red-light: rgba(255, 95, 86, 0.1);
+  --primary-blue-light: rgba(0, 174, 239, 0.1);
+
+  --deep-dark: #1A1A1A;
+  --dark-grey: #2B2B2B;
+  --medium-grey: #757575;
+  --light-grey: #F5F5F5;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Accent Colors */
+  --gold-accent: #D4AF37;
+  --silver-accent: #C0C0C0;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* Brand Utility Classes */
+.text-blue {
+  color: var(--primary-blue) !important;
+}
+
+.text-red {
+  color: var(--primary-red) !important;
+}
+
+.brand-pk {
+  color: var(--primary-red);
+  font-weight: 800;
+}
+
+.brand-door {
+  color: var(--primary-blue);
+  font-weight: 800;
+}

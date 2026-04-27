@@ -1,0 +1,339 @@
+.products-page {
+  background-color: #fcfcfc;
+  min-height: 100vh;
+}
+
+/* Luxury Image Hero */
+.products-hero-light {
+  position: relative;
+  height: 320px;
+  background-image: url('../assets/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.products-hero-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+  z-index: 1;
+}
+
+.products-hero-light .container {
+  position: relative;
+  z-index: 3;
+}
+
+.products-hero-light h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  letter-spacing: -1.5px;
+}
+
+.products-hero-light p {
+  font-size: 1.2rem;
+  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.products-section.section-padding {
+  padding: 40px 0 20px;
+}
+
+/* Search & Controls Luxury */
+.products-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+  gap: 2rem;
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+}
+
+.search-bar-luxury {
+  flex: 1;
+  max-width: 500px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.2rem;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+}
+
+.search-bar-luxury input {
+  width: 100%;
+  padding: 1rem 3.5rem;
+  background: #f8fafc;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  color: #1e293b;
+}
+
+.search-bar-luxury input:focus {
+  background: #fff;
+  border-color: var(--primary-blue-light);
+  box-shadow: 0 10px 20px rgba(0, 174, 239, 0.08);
+}
+
+.search-bar-luxury input:focus + .search-icon {
+  color: var(--primary-blue);
+}
+
+.clear-search {
+  position: absolute;
+  right: 1rem;
+  background: #e2e8f0;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.clear-search:hover {
+  background: #cbd5e1;
+  color: #1e293b;
+}
+
+.product-count-badge {
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+  padding: 0.8rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.product-count-badge strong {
+  font-size: 1.1rem;
+  margin: 0 4px;
+}
+
+/* V6 Product Card - "Clean Boutique" */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.product-card-luxury {
+  background: #fff;
+  border-radius: 24px;
+  padding: 12px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.product-card-luxury:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+  border-color: #e0e0e0;
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+}
+
+.card-image-box {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f8fafc;
+}
+
+.card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.product-card-luxury:hover .card-image-box img {
+  transform: scale(1.1);
+}
+
+.card-hover-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-hover-info span {
+  background: #fff;
+  color: #0f172a;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-luxury:hover .card-hover-info {
+  opacity: 1;
+}
+
+.card-body-luxury {
+  padding: 20px 10px 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card-brand {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  color: #94a3b8;
+}
+
+.card-body-luxury h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.card-footer-luxury {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px dotted #eee;
+}
+
+.card-price-luxury {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary-red);
+}
+
+.card-actions-luxury {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.add-to-cart-btn {
+  width: 36px;
+  height: 36px;
+  background: #f8fafc;
+  color: var(--primary-blue);
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+  transform: translateY(-2px);
+}
+
+.view-btn-circle {
+  width: 36px;
+  height: 36px;
+  background: #f8fafc;
+  color: #94a3b8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.product-card-luxury:hover .view-btn-circle {
+  background: var(--primary-blue);
+  color: #fff;
+  transform: rotate(-45deg);
+}
+
+/* Footer */
+.footer-simple {
+  background: #0f172a;
+  color: #fff;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo .blue {
+  color: var(--primary-blue);
+}
+
+.footer-logo .red {
+  color: var(--primary-red);
+}
+
+@media (max-width: 768px) {
+  .products-hero-light {
+    height: 250px;
+  }
+
+  .products-hero-light h1 {
+    font-size: 2.5rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
