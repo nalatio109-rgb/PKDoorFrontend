@@ -32,6 +32,10 @@ const Contact = () => {
       if (response.ok) {
         setStatus({ loading: false, success: true, error: null });
         setFormData({ name: '', email: '', phone: '', category: '', message: '' });
+        
+        // Tự động mở trang Zalo của PKDoor
+        window.open('https://zalo.me/0905943679', '_blank');
+        
         setTimeout(() => setStatus(prev => ({ ...prev, success: false })), 5000);
       } else {
         throw new Error('Gửi yêu cầu thất bại. Vui lòng thử lại.');

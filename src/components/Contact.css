@@ -1,11 +1,12 @@
-.contact {
+.contact.section-padding {
   background-color: var(--light-grey);
+  padding: 2rem 0;
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 5rem;
+  gap: 3rem;
   align-items: center;
 }
 
@@ -15,7 +16,7 @@
 }
 
 .contact-info .description {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   font-size: 1.1rem;
   color: var(--medium-grey);
 }
@@ -115,7 +116,7 @@
   .contact-form-container {
     padding: 2rem 1.5rem;
   }
-  
+
   .contact-form h3 {
     font-size: 1.5rem;
   }

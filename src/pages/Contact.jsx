@@ -26,7 +26,7 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      <Navbar alwaysSolid={true} />
+      <Navbar />
 
       {/* Hero Section */}
       <section className="contact-hero">
@@ -37,8 +37,10 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="contact-hero-content"
           >
-            <h1>Liên hệ với chúng tôi</h1>
-            <p><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> luôn sẵn sàng hỗ trợ bạn kiến tạo không gian sống hoàn mỹ nhất.</p>
+            <div className="contact-hero-inner">
+              <h1>Liên hệ với chúng tôi</h1>
+              <p><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> luôn sẵn sàng hỗ trợ bạn kiến tạo không gian sống hoàn mỹ nhất.</p>
+            </div>
           </motion.div>
         </div>
       </section>

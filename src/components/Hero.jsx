@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="hero">
       <div className="hero-overlay"></div>
@@ -25,10 +27,10 @@ const Hero = () => {
               Cửa gỗ công nghiệp và phụ kiện chính hãng. Mang vẻ đẹp sang trọng đến mọi công trình.
             </p>
             <div className="hero-btns">
-              <button className="btn-primary">
+              <button className="btn-primary" onClick={() => navigate('/products')}>
                 Xem sản phẩm <ArrowRight size={20} />
               </button>
-              <button className="btn-secondary">
+              <button className="btn-secondary" onClick={() => navigate('/contact')}>
                 Liên hệ tư vấn
               </button>
             </div>
