@@ -6,6 +6,9 @@ import './Hero.css';
 
 const Hero = () => {
   const navigate = useNavigate();
+  // Delay animation to wait for the welcome banner, but only if it's currently showing
+  const baseDelay = !window.hasShownWelcome ? 5.5 : 0;
+
   return (
     <section className="hero">
       <div className="hero-overlay"></div>
@@ -14,7 +17,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: baseDelay }}
           >
             <span className="hero-badge">Sản phẩm chính hãng - Chất lượng đỉnh cao</span>
             <h1 className="hero-title">
@@ -41,7 +44,7 @@ const Hero = () => {
           className="hero-stats"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: baseDelay + 0.2 }}
         >
           <div className="stat-item">
             <strong>10+</strong>
