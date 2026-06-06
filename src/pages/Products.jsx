@@ -6,6 +6,7 @@ import { Search, ArrowUpRight, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { flyToCart } from '../utils/animations';
 import './Products.css';
+import { API_URL } from '../config';
 
 import Footer from '../components/Footer';
 
@@ -16,7 +17,7 @@ const Products = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(`${API_URL}/products`)
       .then(res => res.json())
       .then(data => {
         setProducts(data);

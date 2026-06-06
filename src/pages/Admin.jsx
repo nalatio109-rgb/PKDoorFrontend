@@ -15,6 +15,7 @@ import {
     Mail
 } from "lucide-react";
 import "./Admin.css";
+import { API_URL } from "../config";
 
 function Admin() {
     const [tab, setTab] = useState("add");
@@ -43,7 +44,7 @@ function Admin() {
     // lấy danh sách tin nhắn liên hệ
     const fetchContacts = async () => {
         try {
-            const res = await fetch("http://localhost:5000/contacts");
+            const res = await fetch(`${API_URL}/contacts`);
             const data = await res.json();
             setContacts(data);
         } catch (err) {
@@ -54,7 +55,7 @@ function Admin() {
     // lấy danh sách đơn hàng
     const fetchOrders = async () => {
         try {
-            const res = await fetch("http://localhost:5000/orders");
+            const res = await fetch(`${API_URL}/orders`);
             const data = await res.json();
             setOrders(data);
         } catch (err) {
@@ -65,7 +66,7 @@ function Admin() {
     // lấy danh sách sản phẩm
     const fetchProducts = async () => {
         try {
-            const res = await fetch("http://localhost:5000/products");
+            const res = await fetch(`${API_URL}/products`);
             const data = await res.json();
             setProducts(data);
         } catch (err) {
@@ -107,7 +108,7 @@ function Admin() {
         });
 
         try {
-            const res = await fetch("http://localhost:5000/upload-multiple", {
+            const res = await fetch(`${API_URL}/upload-multiple`, {
                 method: "POST",
                 body: formData,
             });
@@ -125,7 +126,7 @@ function Admin() {
 
     const updateOrderStatus = async (id, newStatus) => {
         try {
-            await fetch(`http://localhost:5000/orders/${id}`, {
+            await fetch(`${API_URL}/orders/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: newStatus })
@@ -142,7 +143,7 @@ function Admin() {
     const deleteOrder = async (id) => {
         if (window.confirm("Bạn có chắc muốn xóa đơn hàng này?")) {
             try {
-                await fetch(`http://localhost:5000/orders/${id}`, { method: "DELETE" });
+                await fetch(`${API_URL}/orders/${id}`, { method: "DELETE" });
                 fetchOrders();
                 setSelectedOrder(null);
             } catch (err) {
@@ -153,7 +154,7 @@ function Admin() {
 
     const updateContactStatus = async (id, newStatus) => {
         try {
-            await fetch(`http://localhost:5000/contacts/${id}`, {
+            await fetch(`${API_URL}/contacts/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: newStatus })
@@ -167,7 +168,7 @@ function Admin() {
     const deleteContact = async (id) => {
         if (window.confirm("Bạn có chắc muốn xóa tin nhắn này?")) {
             try {
-                await fetch(`http://localhost:5000/contacts/${id}`, { method: "DELETE" });
+                await fetch(`${API_URL}/contacts/${id}`, { method: "DELETE" });
                 fetchContacts();
             } catch (err) {
                 console.error(err);
@@ -193,7 +194,7 @@ function Admin() {
             };
 
             if (editId) {
-                await fetch(`http://localhost:5000/products/${editId}`, {
+                await fetch(`${API_URL}/products/${editId}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -203,7 +204,7 @@ function Admin() {
                 alert("Sửa sản phẩm thành công!");
                 setEditId(null);
             } else {
-                await fetch("http://localhost:5000/products", {
+                await fetch(`${API_URL}/products`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -235,7 +236,7 @@ function Admin() {
     // xoá sản phẩm
     const handleDelete = async (id) => {
         if (window.confirm("Bạn có chắc chắn muốn xoá sản phẩm này?")) {
-            await fetch(`http://localhost:5000/products/${id}`, {
+            await fetch(`${API_URL}/products/${id}`, {
                 method: "DELETE",
             });
             alert("Đã xoá sản phẩm!");

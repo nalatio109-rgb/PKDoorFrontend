@@ -19,6 +19,10 @@
   box-shadow: var(--shadow-md);
 }
 
+
+
+
+
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -289,6 +293,15 @@
   }
 }
 
+@media (max-width: 768px) {
+  .hotline {
+    display: none;
+  }
+  .nav-actions {
+    gap: 1rem;
+  }
+}
+
 /* Dark Theme (for light backgrounds) */
 .navbar.theme-dark.transparent .nav-links li a {
   color: var(--deep-dark);
@@ -318,9 +331,74 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background: var(--white);
-    padding: 2rem;
-    box-shadow: var(--shadow-lg);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     gap: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
+
+  .nav-links.active li a {
+    color: var(--white) !important;
+    text-shadow: none !important;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-links.active li a:hover {
+    color: var(--primary-blue) !important;
+  }
+
+  /* Disable absolute positioning on mobile dropdowns so they stack inline */
+  .nav-links.active .dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    box-shadow: none;
+    border: none;
+    padding: 0.5rem 0 0 1rem;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: transparent;
+  }
+
+  .nav-links.active .dropdown-menu::before {
+    display: none;
+  }
+
+  .nav-links.active .dropdown-menu li a {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .nav-links.active .dropdown-menu li a:hover {
+    color: var(--primary-blue) !important;
+    background: transparent;
+  }
+}
+
+/* Navbar active state over mobile menu */
+.navbar.menu-open {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: none !important;
+}
+
+.navbar.menu-open .logo-door {
+  color: var(--primary-blue) !important;
+}
+
+.navbar.menu-open .mobile-menu-btn {
+  color: var(--white) !important;
+}
+
+.navbar.menu-open .cart-toggle-btn {
+  color: var(--white) !important;
 }

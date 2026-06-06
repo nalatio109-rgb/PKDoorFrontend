@@ -7,7 +7,8 @@ import './Hero.css';
 const Hero = () => {
   const navigate = useNavigate();
   // Delay animation to wait for the welcome banner, but only if it's currently showing
-  const baseDelay = !window.hasShownWelcome ? 5.5 : 0;
+  // Set to 0 since there is no welcome banner, preventing a 5.5s delay on page load
+  const baseDelay = 0;
 
   return (
     <section className="hero">

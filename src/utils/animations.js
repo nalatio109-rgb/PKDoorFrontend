@@ -1,3 +1,5 @@
+import { API_URL } from '../config';
+
 export const flyToCart = (event, imageUrl) => {
     const cartBtn = document.querySelector('.cart-toggle-btn');
     if (!cartBtn) {
@@ -16,7 +18,7 @@ export const flyToCart = (event, imageUrl) => {
 
     let finalImageUrl = imageUrl;
     if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
-        finalImageUrl = `http://localhost:5000${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+        finalImageUrl = `${API_URL}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
     }
 
     const flyer = document.createElement('img');

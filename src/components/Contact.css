@@ -1,6 +1,28 @@
 .contact.section-padding {
-  background-color: var(--light-grey);
-  padding: 2rem 0;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4rem 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact.section-padding::before {
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(222, 55, 46, 0.04) 0%, rgba(222, 55, 46, 0) 70%);
+  top: -100px;
+  left: -150px;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact .container {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-grid {
@@ -13,12 +35,13 @@
 .contact-info .title {
   text-align: left;
   margin-left: 0;
+  color: var(--white);
 }
 
 .contact-info .description {
   margin-bottom: 1rem;
   font-size: 1.1rem;
-  color: var(--medium-grey);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .info-list {
@@ -49,10 +72,11 @@
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.3rem;
+  color: var(--white);
 }
 
 .info-text p {
-  color: var(--medium-grey);
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.95rem;
 }
 
@@ -60,7 +84,10 @@
   padding: 3rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(5px);
+  color: var(--white);
 }
 
 .contact-form h3 {
@@ -79,20 +106,40 @@
 .form-group textarea {
   width: 100%;
   padding: 1rem 1.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-md);
   font-size: 1rem;
   transition: var(--transition-normal);
-  background: var(--light-grey);
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group select {
+  color: #ffffff;
+}
+
+.form-group select option {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+.form-group select option:first-child {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-red);
-  background: var(--white);
-  box-shadow: 0 0 0 4px var(--primary-red-light);
+  border-color: var(--primary-blue);
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 4px rgba(0, 174, 239, 0.15);
 }
 
 .w-full {
@@ -113,6 +160,10 @@
 }
 
 @media (max-width: 768px) {
+  .contact.section-padding {
+    padding: 3rem 0;
+  }
+
   .contact-form-container {
     padding: 2rem 1.5rem;
   }

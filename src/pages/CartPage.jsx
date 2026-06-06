@@ -6,6 +6,7 @@ import { Trash2, Plus, Minus, ShoppingBag, MapPin, User, Phone, MessageSquare, A
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './CartPage.css';
+import { API_URL } from '../config';
 
 const CartPage = () => {
     const { cartItems, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
@@ -46,7 +47,7 @@ const CartPage = () => {
             };
 
             // 2. Gửi lên Backend
-            const response = await fetch("http://localhost:5000/orders", {
+            const response = await fetch(`${API_URL}/orders`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(orderData)

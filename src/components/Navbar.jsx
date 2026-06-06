@@ -18,7 +18,7 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [alwaysSolid]);
 
-  const navClass = `navbar ${isScrolled || alwaysSolid ? 'scrolled' : 'transparent'} ${darkTheme ? 'theme-dark' : ''}`;
+  const navClass = `navbar ${isScrolled || alwaysSolid ? 'scrolled' : 'transparent'} ${darkTheme ? 'theme-dark' : ''} ${isMobileMenuOpen ? 'menu-open' : ''}`;
 
   return (
     <nav className={navClass}>

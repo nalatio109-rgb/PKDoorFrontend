@@ -3,12 +3,13 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Categories.css';
+import { API_URL } from '../config';
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(`${API_URL}/products`)
       .then(res => res.json())
       .then(data => setCategories(data.slice(0, 6)))
       .catch(err => console.log(err));

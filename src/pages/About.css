@@ -1,6 +1,7 @@
 .about-page {
-  background-color: #fff;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   overflow-x: hidden;
+  position: relative;
 }
 
 /* Hero Section */
@@ -63,6 +64,30 @@
 }
 
 /* Intro Section */
+.about-intro {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-intro::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 174, 239, 0.05) 0%, rgba(0, 174, 239, 0) 70%);
+  top: 10%;
+  left: -150px;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-intro .container {
+  position: relative;
+  z-index: 1;
+}
+
 .intro-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -137,12 +162,33 @@
 
 /* Advantages */
 .about-advantages {
-  background-color: #f8fafc;
+  position: relative;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  overflow: hidden;
+}
+
+.about-advantages::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(222, 55, 46, 0.04) 0%, rgba(222, 55, 46, 0) 70%);
+  bottom: 10%;
+  right: -150px;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-advantages .container {
+  position: relative;
+  z-index: 1;
 }
 
 .section-header-center {
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto 5rem;
 }
 
@@ -157,49 +203,86 @@
 }
 
 .section-header-center h2 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -1px;
+  text-wrap: balance;
+  line-height: 1.25;
 }
 
 .advantages-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
 }
 
 .advantage-card {
   background: #fff;
-  padding: 40px;
+  padding: 40px 30px;
   border-radius: 24px;
-  transition: all 0.4s ease;
-  border: 1px solid #f1f5f9;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.advantage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-red) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.advantage-card:hover::before {
+  opacity: 1;
 }
 
 .advantage-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  border-color: rgba(0, 174, 239, 0.15);
 }
 
 .adv-icon {
   width: 60px;
   height: 60px;
-  background: #f0f9ff;
+  background: linear-gradient(135deg, rgba(0, 174, 239, 0.08) 0%, rgba(0, 174, 239, 0.02) 100%);
+  border: 1px solid rgba(0, 174, 239, 0.15);
   color: var(--primary-blue);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.advantage-card:hover .adv-icon {
+  transform: scale(1.1) rotate(4deg);
+  background: var(--primary-blue);
+  color: #ffffff;
+  border-color: var(--primary-blue);
+  box-shadow: 0 8px 20px rgba(0, 174, 239, 0.25);
 }
 
 .advantage-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 800;
-  margin-bottom: 1rem;
+  color: #0f172a;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.5px;
 }
 
 .advantage-card p {
-  color: #64748b;
+  color: #475569;
+  font-size: 0.95rem;
   line-height: 1.6;
 }
 
@@ -285,4 +368,57 @@
   .about-hero h1 { font-size: 2.8rem; }
   .benefits-content { padding: 40px; }
   .benefits-visual { padding: 80px 0; }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    height: auto;
+    min-height: 280px;
+    padding-top: 130px;
+    padding-bottom: 50px;
+  }
+
+  .intro-grid {
+    gap: 40px;
+  }
+  
+  .floating-card {
+    right: 0;
+    bottom: -20px;
+    padding: 20px;
+    border-radius: 16px;
+  }
+  
+  .floating-card strong {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .about-hero .sub-headline {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  
+  .opportunity-badge {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .tag {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .product-tags {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
 }

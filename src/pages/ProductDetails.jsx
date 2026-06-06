@@ -6,6 +6,7 @@ import { ShoppingCart, ArrowLeft, CheckCircle, Info, Maximize2, ShieldCheck, Tru
 import { useCart } from '../context/CartContext';
 import { flyToCart } from '../utils/animations';
 import './ProductDetails.css';
+import { API_URL } from '../config';
 
 import Footer from '../components/Footer';
 
@@ -20,7 +21,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch(`http://localhost:5000/products/${id}`)
+    fetch(`${API_URL}/products/${id}`)
       .then(res => {
         if (!res.ok) throw new Error("Không tìm thấy sản phẩm");
         return res.json();

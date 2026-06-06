@@ -1,5 +1,27 @@
 .categories {
-  background-color: #f8fafc;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.categories::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 174, 239, 0.05) 0%, rgba(0, 174, 239, 0) 75%);
+  top: -100px;
+  right: -200px;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.categories .container {
+  position: relative;
+  z-index: 1;
 }
 
 .section-header {
@@ -37,7 +59,7 @@
   font-size: 3rem;
   font-weight: 900;
   line-height: 1.2;
-  color: #1e293b;
+  color: var(--white);
   margin: 0;
 }
 
@@ -53,7 +75,7 @@
 }
 
 .section-header .description {
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -66,18 +88,20 @@
 }
 
 .category-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  border: 1px solid #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(5px);
 }
 
 .category-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-  border-color: #fecaca;
+  box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
+  border-color: rgba(0, 174, 239, 0.4);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .card-image {
@@ -117,11 +141,11 @@
   font-size: 1.3rem;
   font-weight: 800;
   margin-bottom: 0.8rem;
-  color: #1e293b;
+  color: var(--white);
 }
 
 .card-content p {
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
   line-height: 1.6;
