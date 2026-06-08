@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Award, Zap, CheckCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import showroomImg from '../assets/1.png';
 import './AboutHome.css';
 
 const AboutHome = () => {
@@ -16,7 +17,7 @@ const AboutHome = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&q=80&w=800" alt="PK Door Showroom" />
+            <img src={showroomImg} alt="PK Door Showroom" />
             <div className="experience-badge">
               <strong>10+</strong>
               <span>Năm kinh nghiệm</span>

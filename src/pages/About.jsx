@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 import { CheckCircle, ShieldCheck, Zap, TrendingUp, Users, Award, ArrowRight } from 'lucide-react';
 import './About.css';
+import showroomImg from '../assets/1.png';
+
 
 import Footer from '../components/Footer';
 
@@ -72,7 +74,7 @@ const About = () => {
               viewport={{ once: true }}
             >
               <div className="image-stack">
-                <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&q=80&w=800" alt="Showroom" className="main-img" />
+                <img src={showroomImg} alt="PK Door Showroom" />
                 <div className="floating-card">
                   <TrendingUp size={32} color="var(--primary-blue)" />
                   <strong>+50%</strong>
