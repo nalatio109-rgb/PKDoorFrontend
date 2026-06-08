@@ -52,17 +52,19 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Newsletter/Trust Column */}
-        <div className="footer-col trust-col">
-          <h3>Đăng ký tư vấn</h3>
-          <p>Nhận báo giá và tư vấn mẫu cửa mới nhất từ <span className="brand-pk">PK</span> <span className="brand-door">DOOR</span>.</p>
-          <div className="newsletter-form">
-            <input type="email" placeholder="Email của bạn" />
-            <button className="btn-send-footer"><ArrowRight size={20} /></button>
-          </div>
-          <div className="trust-badges">
-            <div className="badge">Chất lượng cao</div>
-            <div className="badge">Giá cạnh tranh</div>
+        {/* Map Column */}
+        <div className="footer-col map-col">
+          <h3>Vị trí showroom</h3>
+          <div className="footer-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.123456789!2d108.123456789!3d16.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219123456789%3A0x1234567890abcdef!2zUGjDuiBUaMaw4bufbmcsIEhvw6AgS2jDoW5oLCBMacOqbiBDaGnhu4N1LCDEkMOgIE7hurVuZywgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1234567890123"
+              title="Bản đồ PK Door"
+              width="100%"
+              height="200"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </div>

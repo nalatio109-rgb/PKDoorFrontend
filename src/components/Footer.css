@@ -17,8 +17,8 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 0.8fr 1fr;
-  gap: 50px;
+  grid-template-columns: 1.1fr 1fr 0.6fr 1.3fr;
+  gap: 30px;
   padding-bottom: 60px;
 }
 
@@ -110,6 +110,24 @@
 
 .contact-details strong {
   color: #fff;
+}
+
+.footer-map {
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  line-height: 0;
+}
+
+.footer-map:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 10px rgba(0, 174, 239, 0.25);
+}
+
+.footer-map iframe {
+  display: block;
 }
 
 /* Links Column */
