@@ -7,8 +7,10 @@ import showroomImg from '../assets/1.png';
 
 
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
   const advantages = [
     { icon: <ShieldCheck size={24} />, title: "Chống ẩm tuyệt đối", desc: "Kháng nước 100%, không cong vênh, co ngót." },
     { icon: <Award size={24} />, title: "Độ bền vượt trội", desc: "Phù hợp với khí hậu khắc nghiệt của Việt Nam." },
@@ -37,7 +39,7 @@ const About = () => {
             className="about-hero-content"
           >
             <span className="opportunity-badge">🔥 Cơ hội kinh doanh vàng</span>
-            <h1><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> Mở rộng đại lý Toàn Quốc</h1>
+            <h1><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> Mở rộng đại lý <br />Toàn Quốc</h1>
             <p className="sub-headline">CHÍNH SÁCH TỐT - GIÁ CẠNH TRANH - LỢI NHUẬN HẤP DẪN</p>
           </motion.div>
         </div>
@@ -131,7 +133,7 @@ const About = () => {
                   </motion.li>
                 ))}
               </ul>
-              <button className="btn-contact-about">
+              <button className="btn-contact-about" onClick={() => navigate('/contact')}>
                 Đăng ký đại lý ngay <ArrowRight size={20} />
               </button>
             </div>

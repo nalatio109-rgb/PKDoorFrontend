@@ -48,40 +48,46 @@ const Contact = () => {
 
   return (
     <section className="contact section-padding" id="contact">
+      <div className="contact-decorations">
+        <div className="decor-glow-1"></div>
+        <div className="decor-glow-2"></div>
+        <div className="decor-glow-3"></div>
+        <div className="decor-grid"></div>
+      </div>
       <div className="container">
         <div className="contact-grid">
           <div className="contact-info">
             <span className="subtitle">Liên hệ ngay</span>
-            <h2 className="title"><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> - Đồng hành <br /><span className="text-primary">cùng công trình</span> của bạn</h2>
+            <h2 className="title"><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> - Đồng hành <span className="text-primary">cùng công trình</span> của bạn</h2>
             <p className="description">
               Chúng tôi luôn sẵn sàng lắng nghe và tư vấn giải pháp tốt nhất cho ngôi nhà của bạn.
             </p>
 
             <div className="info-list">
-              <div className="info-item">
-                <div className="info-icon"><MapPin size={24} /></div>
-                <div className="info-text">
+              <div className="info-item-wrapper">
+                <div className="info-item">
+                  <div className="info-icon"><MapPin size={18} /></div>
                   <h4>Địa chỉ CS 1</h4>
                   <p>Phú Thượng, Hoà Khánh, TP. Đà Nẵng</p>
                 </div>
               </div>
-              <div className="info-item">
-                <div className="info-icon"><MapPin size={24} /></div>
-                <div className="info-text">
+              <div className="info-item-wrapper">
+                <div className="info-item">
+                  <div className="info-icon"><MapPin size={18} /></div>
                   <h4>Địa chỉ CS 2</h4>
                   <p>Khối phố Hà Bản, P. Điện Bàn Đông, TP. Đà Nẵng</p>
                 </div>
               </div>
-              <div className="info-item">
-                <div className="info-icon"><Phone size={24} /></div>
-                <div className="info-text">
+              <div className="info-item-wrapper">
+                <div className="info-item">
+                  <div className="info-icon"><Phone size={18} /></div>
                   <h4>Hotline</h4>
                   <p>0905 943 679</p>
                 </div>
               </div>
-              <div className="info-item">
-                <div className="info-icon"><Clock size={24} /></div>
-                <div className="info-text">
+              <div className="info-item-wrapper">
+                <div className="info-item">
+                  <div className="info-icon"><Clock size={18} /></div>
                   <h4>Giờ làm việc</h4>
                   <p>Thứ 2 - Chủ Nhật: 07:30 - 21:00</p>
                 </div>
@@ -89,7 +95,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="contact-form-container glass">
+          <div className="contact-form-container">
             {status.success ? (
               <div className="success-message">
                 <CheckCircle size={60} color="#22c55e" />

@@ -26,24 +26,9 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      <Navbar />
+      <Navbar alwaysSolid={true} />
 
-      {/* Hero Section */}
-      <section className="contact-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="contact-hero-content"
-          >
-            <div className="contact-hero-inner">
-              <h1>Liên hệ với chúng tôi</h1>
-              <p><span className="brand-pk">PK</span> <span className="brand-door">DOOR</span> luôn sẵn sàng hỗ trợ bạn kiến tạo không gian sống hoàn mỹ nhất.</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+
 
       {/* Main Contact Section (Reusing existing component) */}
       <ContactSection />
@@ -56,17 +41,19 @@ const Contact = () => {
             <h2>Ghé thăm showroom <span className="brand-pk">PK</span> <span className="brand-door">DOOR</span></h2>
           </div>
 
-          <div className="map-tabs">
-            {branches.map(branch => (
-              <button
-                key={branch.id}
-                className={`map-tab ${activeBranch === branch.id ? 'active' : ''}`}
-                onClick={() => setActiveBranch(branch.id)}
-              >
-                <MapPin size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
-                {branch.name}
-              </button>
-            ))}
+          <div className="map-tabs-wrapper">
+            <div className="map-tabs">
+              {branches.map(branch => (
+                <button
+                  key={branch.id}
+                  className={`map-tab ${activeBranch === branch.id ? 'active' : ''}`}
+                  onClick={() => setActiveBranch(branch.id)}
+                >
+                  <MapPin size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+                  {branch.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           <motion.div
