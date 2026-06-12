@@ -18,7 +18,7 @@
     display: flex;
     min-height: 100vh;
     background: var(--admin-bg);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family);
 }
 
 /* Sidebar */
