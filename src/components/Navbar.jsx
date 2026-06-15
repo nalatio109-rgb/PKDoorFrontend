@@ -32,15 +32,7 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
         <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><Link to="/">TRANG CHỦ</Link></li>
           <li><Link to="/about">VỀ CHÚNG TÔI</Link></li>
-          <li className="dropdown">
-            <Link to="/products">SẢN PHẨM <ChevronDown size={16} /></Link>
-            <ul className="dropdown-menu">
-              <li><a href="#plastic-doors">Cửa nhựa giả gỗ</a></li>
-              <li><a href="#wood-doors">Cửa gỗ công nghiệp</a></li>
-              <li><a href="#composite-doors">Cửa Composite</a></li>
-              <li><a href="#steel-doors">Cửa thép vân gỗ</a></li>
-            </ul>
-          </li>
+          <li><Link to="/products">SẢN PHẨM</Link></li>
 
           {/* <li><Link to="/news">TIN TỨC</Link></li> */}
           <li><Link to="/contact">LIÊN HỆ</Link></li>

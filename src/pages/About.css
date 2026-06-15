@@ -1,5 +1,5 @@
 .about-page {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: #ffffff;
   overflow-x: hidden;
   position: relative;
   font-family: var(--font-heading);
@@ -172,7 +172,7 @@
 /* Advantages */
 .about-advantages {
   position: relative;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  background: #ffffff;
   overflow: hidden;
 }
 
@@ -800,7 +800,7 @@
 
 
 .about-process {
-  background: #f1f5f9; /* darker slate-gray background for solid contrast */
+  background: #ffffff;
   padding-bottom: 11rem;
 }
 
