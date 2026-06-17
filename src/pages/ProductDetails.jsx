@@ -145,7 +145,7 @@ const ProductDetails = () => {
       <section id="product-section" className="product-main-area">
         <div className="container">
           <div className="section-title">
-            <h2>PRODUCT SECTION</h2>
+            <h2>SẢN PHẨM</h2>
             <div className="line-dec"></div>
           </div>
 

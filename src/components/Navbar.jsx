@@ -32,7 +32,15 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
         <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><Link to="/">TRANG CHỦ</Link></li>
           <li><Link to="/about">VỀ CHÚNG TÔI</Link></li>
-          <li><Link to="/products">SẢN PHẨM</Link></li>
+          <li className="dropdown">
+            <a href="#!" onClick={(e) => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
+              SẢN PHẨM <ChevronDown size={16} />
+            </a>
+            <ul className="dropdown-menu">
+              <li><Link to="/products/composite">CỬA NHỰA GỖ COMPOSITE</Link></li>
+              <li><Link to="/products/pvc">PHÔI CỬA NHỰA PVC</Link></li>
+            </ul>
+          </li>
 
           {/* <li><Link to="/news">TIN TỨC</Link></li> */}
           <li><Link to="/contact">LIÊN HỆ</Link></li>
@@ -46,7 +54,7 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
               <strong>0905 943 679</strong>
             </div>
           </a>
-          
+
           <Link to="/cart" className="cart-toggle-btn">
             <ShoppingBag size={24} />
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}

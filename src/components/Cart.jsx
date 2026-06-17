@@ -21,10 +21,10 @@ const Cart = () => {
         
         cartItems.forEach((item, index) => {
             message += `${index + 1}. ${item.name} - SL: ${item.quantity}\n`;
-            message += `   Giá: ${Number(item.price).toLocaleString()}đ\n\n`;
+            message += `   Giá: ${item.price > 0 ? Number(item.price).toLocaleString() + 'đ' : 'Liên hệ'}\n\n`;
         });
         
-        message += `Tổng cộng: ${cartTotal.toLocaleString()}đ\n`;
+        message += `Tổng cộng: ${cartTotal > 0 ? cartTotal.toLocaleString() + 'đ' : 'Liên hệ'}\n`;
         message += "Vui lòng tư vấn giúp tôi!";
         
         const encodedMessage = encodeURIComponent(message);
@@ -77,7 +77,7 @@ const Cart = () => {
                                         </div>
                                         <div className="item-details">
                                             <h3>{item.name}</h3>
-                                            <p className="item-price">{Number(item.price).toLocaleString()}đ</p>
+                                            <p className="item-price">{item.price > 0 ? `${Number(item.price).toLocaleString()}đ` : 'Liên hệ'}</p>
                                             <div className="item-controls">
                                                 <div className="quantity-box">
                                                     <button onClick={() => updateQuantity(item._id, -1)}><Minus size={14} /></button>
@@ -98,7 +98,7 @@ const Cart = () => {
                             <div className="cart-footer">
                                 <div className="total-row">
                                     <span>Tổng tạm tính:</span>
-                                    <span className="total-amount">{cartTotal.toLocaleString()}đ</span>
+                                    <span className="total-amount">{cartTotal > 0 ? `${cartTotal.toLocaleString()}đ` : 'Liên hệ'}</span>
                                 </div>
                                 <Link 
                                     to="/cart" 

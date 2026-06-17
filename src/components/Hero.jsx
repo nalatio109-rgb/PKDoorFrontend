@@ -31,9 +31,15 @@ const Hero = () => {
               Cửa gỗ công nghiệp và phụ kiện chính hãng. Mang vẻ đẹp sang trọng đến mọi công trình.
             </p>
             <div className="hero-btns">
-              <button className="btn-primary" onClick={() => navigate('/products')}>
-                Xem sản phẩm <ArrowRight size={20} />
-              </button>
+              <motion.button 
+                className="btn-primary hero-btn-premium" 
+                onClick={() => navigate('/products')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="btn-text">Xem sản phẩm <ArrowRight size={20} /></span>
+                <div className="btn-shine"></div>
+              </motion.button>
               <button className="btn-secondary" onClick={() => navigate('/contact')}>
                 Liên hệ tư vấn
               </button>

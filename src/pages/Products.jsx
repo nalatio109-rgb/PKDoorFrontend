@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 import { ShoppingCart, CheckCircle, VolumeX, Sun, Leaf, Shield, Wrench, PhoneCall, ChevronRight, ChevronLeft } from 'lucide-react';
@@ -10,12 +10,35 @@ import Footer from '../components/Footer';
 import mauImg from '../assets/mau.png';
 import cuamauvangImg from '../assets/cuamauvang.png';
 import taynamcuaImg from '../assets/taynamcua.png';
+import { API_URL } from '../config';
 
 const Products = () => {
   const { addToCart } = useCart();
 
+  const [mainProduct, setMainProduct] = useState({
+    _id: "composite-main",
+    name: "Cửa Nhựa Gỗ Composite",
+    price: 390000,
+    image: cuamauvangImg,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    fetch(`${API_URL}/products`)
+      .then(res => res.json())
+      .then(data => {
+        const product = data.find(p => p.name.toLowerCase().includes('composite'));
+        if (product) {
+          setMainProduct(prev => ({
+            ...prev,
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image || prev.image,
+          }));
+        }
+      })
+      .catch(err => console.log(err));
   }, []);
 
   const galleryImages = [
@@ -25,14 +48,6 @@ const Products = () => {
     { name: "Văn phòng", src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=400&h=300" },
     { name: "Cửa hàng", src: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=400&h=300" }
   ];
-
-  // Dummy product data for the main card
-  const mainProduct = {
-    _id: "composite-main",
-    name: "Cửa Nhựa Gỗ Composite",
-    price: 390000,
-    image: cuamauvangImg,
-  };
 
   return (
     <div className="products-landing-page">
@@ -90,6 +105,7 @@ const Products = () => {
         </div>
 
         <motion.div
+          className="hero-swatches-container"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -107,75 +123,108 @@ const Products = () => {
       <section id="product-section" className="product-main-area">
         <div className="container">
           <div className="section-title">
-            <h2>PRODUCT SECTION</h2>
+            <h2>SẢN PHẨM</h2>
             <div className="line-dec"></div>
           </div>
 
-          <div className="product-cards-wrapper">
-            {/* Main Product Card */}
-            <div className="main-product-card">
-              <div className="product-image-box">
-                <img src={mainProduct.image} alt="Cửa Nhựa Gỗ Composite" />
+          <div className="product-showcase">
+            <div className="premium-product-card">
+              <div className="premium-image-side">
+                <motion.img
+                  src={mainProduct.image}
+                  alt="Cửa Nhựa Gỗ Composite"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <div className="glow-effect"></div>
               </div>
-              <div className="product-info-box">
-                <h3 className="product-title">{mainProduct.name}</h3>
+              <div className="premium-info-side">
+                <div className="product-badge">Bán chạy nhất</div>
+                <h3 className="premium-title">{mainProduct.name}</h3>
 
-                <div className="color-options">
-                  <div className="color-circle c-1"></div>
-                  <div className="color-circle c-2"></div>
-                  <div className="color-circle c-3"></div>
-                  <div className="color-circle c-4"></div>
-                  <div className="color-circle c-5"></div>
-                  <div className="color-circle c-6"></div>
-                  <div className="color-circle c-7"></div>
-                </div>
-
-                <div className="feature-icons-grid">
-                  <div className="f-icon">
-                    <CheckCircle className="icon drop" size={24} />
-                    <span>Chống ẩm</span>
-                  </div>
-                  <div className="f-icon">
-                    <VolumeX className="icon wave" size={24} />
-                    <span>Cách âm</span>
-                  </div>
-                  <div className="f-icon">
-                    <Sun className="icon sun" size={24} />
-                    <span>Bền màu</span>
-                  </div>
-                  <div className="f-icon">
-                    <Shield className="icon shield" size={24} />
-                    <span>Đánh chặn khói</span>
-                  </div>
-                  <div className="f-icon">
-                    <Leaf className="icon leaf" size={24} />
-                    <span>Thân thiện môi trường</span>
+                <div className="premium-colors">
+                  <span className="color-label">Màu sắc thịnh hành:</span>
+                  <div className="color-options">
+                    <div className="color-circle c-1" title="Nâu gụ"></div>
+                    <div className="color-circle c-2" title="Xám tro"></div>
+                    <div className="color-circle c-3" title="Trắng ngà"></div>
+                    <div className="color-circle c-4" title="Sồi đậm"></div>
+                    <div className="color-circle c-5" title="Rượu vang"></div>
+                    <div className="color-circle c-6" title="Than củi"></div>
                   </div>
                 </div>
 
-                <div className="price-tag">
-                  {Number(mainProduct.price).toLocaleString()}đ
+                <div className="premium-features">
+                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                    <CheckCircle className="f-icon drop" size={24} />
+                    <span>Chống ẩm tuyệt đối</span>
+                  </motion.div>
+                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                    <VolumeX className="f-icon wave" size={24} />
+                    <span>Cách âm vượt trội</span>
+                  </motion.div>
+                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                    <Sun className="f-icon sun" size={24} />
+                    <span>Bền màu 10 năm</span>
+                  </motion.div>
+                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                    <Shield className="f-icon shield" size={24} />
+                    <span>Chống cháy lan</span>
+                  </motion.div>
                 </div>
 
-                <button className="btn-order-now" onClick={(e) => {
-                  addToCart(mainProduct);
-                  flyToCart(e, mainProduct.image);
-                }}>
-                  ĐẶT HÀNG NGAY
-                </button>
+
+
+                <motion.button
+                  className="btn-premium-order"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={(e) => {
+                    addToCart(mainProduct);
+                    flyToCart(e, mainProduct.image);
+                  }}
+                >
+                  <span className="btn-text">ĐẶT HÀNG NGAY</span>
+                  <div className="btn-shine"></div>
+                </motion.button>
               </div>
             </div>
 
-            {/* Accessory Card */}
-            <div className="accessory-card poster-mode">
-              <Link to="/products" style={{ display: 'block', width: '100%', height: '100%' }}>
-                <img src={taynamcuaImg} alt="Phụ kiện cửa" className="poster-img" />
-              </Link>
-              <h3 className="acc-title">Phụ Kiện Cửa</h3>
-              <p className="acc-desc">
-                Cửa nhựa gỗ Composite của cửa có khóa, bản lề, hít cửa...
-              </p>
-              <Link to="/products" className="btn-view-more">Xem thêm</Link>
+            {/* Recommended Accessories */}
+            <div className="recommended-accessories">
+              <div className="rec-header">
+                <h3>Phụ kiện khuyên dùng</h3>
+                <Link to="/products" className="view-all-link">Xem tất cả <ChevronRight size={16} /></Link>
+              </div>
+              <div className="rec-items-grid">
+                <div className="rec-item-card">
+                  <div className="rec-img">
+                    <img src={taynamcuaImg} alt="Phụ kiện khóa cửa" />
+                  </div>
+                  <div className="rec-info">
+                    <h4>Khóa cửa cao cấp</h4>
+                    <p>Bảo mật 3 lớp, chống cắt phá.</p>
+                  </div>
+                  <button className="btn-add-rec" onClick={(e) => {
+                    addToCart({ _id: 'acc-1', name: 'Khóa cửa cao cấp', price: 450000, image: taynamcuaImg });
+                    flyToCart(e, taynamcuaImg);
+                  }}><ShoppingCart size={18} /></button>
+                </div>
+                {/* Add a dummy item for layout */}
+                <div className="rec-item-card">
+                  <div className="rec-img">
+                    <img src={taynamcuaImg} alt="Bản lề" style={{ filter: 'hue-rotate(45deg)' }} />
+                  </div>
+                  <div className="rec-info">
+                    <h4>Bản lề Inox 304</h4>
+                    <p>Chống rỉ sét, chịu tải trọng lớn.</p>
+                  </div>
+                  <button className="btn-add-rec" onClick={(e) => {
+                    addToCart({ _id: 'acc-2', name: 'Bản lề Inox 304', price: 120000, image: taynamcuaImg });
+                    flyToCart(e, taynamcuaImg);
+                  }}><ShoppingCart size={18} /></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -185,12 +234,12 @@ const Products = () => {
       <section className="why-choose-us-section">
         <div className="container">
           <div className="section-title">
-            <h2>WHY CHOOSE US</h2>
+            <h2>VÌ SAO CHỌN PK DOOR</h2>
             <div className="line-dec"></div>
           </div>
 
           <div className="benefits-bar">
-            <motion.div 
+            <motion.div
               className="benefit-item"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -201,7 +250,7 @@ const Products = () => {
               <div className="benefit-icon bg-red"><Shield size={20} /></div>
               <span>10 Năm Bảo Hành</span>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="benefit-item"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -212,7 +261,7 @@ const Products = () => {
               <div className="benefit-icon bg-red"><Wrench size={20} /></div>
               <span>Lắp Đặt Tận Nơi</span>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="benefit-item"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -231,7 +280,7 @@ const Products = () => {
       <section className="gallery-section">
         <div className="container">
           <div className="section-title">
-            <h2>COLOR INSPIRATION GALLERY</h2>
+            <h2>KHÔNG GIAN THỰC TẾ</h2>
             <div className="line-dec"></div>
           </div>
 

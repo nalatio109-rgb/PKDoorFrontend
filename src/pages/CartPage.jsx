@@ -111,7 +111,7 @@ const CartPage = () => {
                                         </div>
                                         <div className="item-info">
                                             <h4>{item.name}</h4>
-                                            <p className="item-price-unit">{Number(item.price).toLocaleString()}đ</p>
+                                            <p className="item-price-unit">{item.price > 0 ? `${Number(item.price).toLocaleString()}đ` : 'Liên hệ'}</p>
                                             <div className="item-controls-row">
                                                 <div className="quantity-selector">
                                                     <button onClick={() => updateQuantity(item._id, -1)}><Minus size={14} /></button>
@@ -130,7 +130,7 @@ const CartPage = () => {
                                             </div>
                                         </div>
                                         <div className="item-subtotal">
-                                            {(item.price * item.quantity).toLocaleString()}đ
+                                            {item.price > 0 ? `${(item.price * item.quantity).toLocaleString()}đ` : 'Liên hệ'}
                                         </div>
                                     </div>
                                 ))}
@@ -191,7 +191,7 @@ const CartPage = () => {
                                     <div className="order-summary">
                                         <div className="summary-row">
                                             <span>Tổng giá trị hàng hóa:</span>
-                                            <span>{cartTotal.toLocaleString()}đ</span>
+                                            <span>{cartTotal > 0 ? `${cartTotal.toLocaleString()}đ` : 'Liên hệ'}</span>
                                         </div>
                                         <div className="summary-row">
                                             <span>Phí vận chuyển:</span>
@@ -199,7 +199,7 @@ const CartPage = () => {
                                         </div>
                                         <div className="summary-total">
                                             <span>TỔNG CỘNG:</span>
-                                            <span>{cartTotal.toLocaleString()}đ</span>
+                                            <span>{cartTotal > 0 ? `${cartTotal.toLocaleString()}đ` : 'Liên hệ'}</span>
                                         </div>
                                     </div>
 

@@ -38,22 +38,22 @@ const AboutHome = () => {
             </p>
 
             <div className="about-home-features">
-              <div className="feature-item">
+              <motion.div className="feature-glass-card" whileHover={{ y: -5, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
                 <div className="feature-icon"><ShieldCheck size={20} /></div>
                 <span>Chống ẩm tuyệt đối</span>
-              </div>
-              <div className="feature-item">
+              </motion.div>
+              <motion.div className="feature-glass-card" whileHover={{ y: -5, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
                 <div className="feature-icon"><Award size={20} /></div>
                 <span>Độ bền vượt trội</span>
-              </div>
-              <div className="feature-item">
+              </motion.div>
+              <motion.div className="feature-glass-card" whileHover={{ y: -5, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
                 <div className="feature-icon"><Zap size={20} /></div>
                 <span>Thi công nhanh chóng</span>
-              </div>
-              <div className="feature-item">
+              </motion.div>
+              <motion.div className="feature-glass-card" whileHover={{ y: -5, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
                 <div className="feature-icon"><CheckCircle size={20} /></div>
                 <span>Bảo hành chính hãng</span>
-              </div>
+              </motion.div>
             </div>
 
             <Link to="/about" className="btn-more">

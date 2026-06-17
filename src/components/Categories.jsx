@@ -41,6 +41,14 @@ const Categories = () => {
             const prefix = name.toLowerCase().includes("composite") ? "C" : name.toLowerCase().includes("pvc") ? "P" : "D";
             const num = String(index + 1).padStart(2, '0');
             const productCode = `${prefix}${num}`;
+            
+            // Determine custom link destination
+            let linkTo = `/product/${cat._id}`;
+            if (name.toLowerCase().includes('pvc')) {
+              linkTo = '/products/pvc';
+            } else if (name.toLowerCase().includes('composite')) {
+              linkTo = '/products/composite';
+            }
 
             // Parse specifications
             const parsedSpecs = (cat.specs && cat.specs.trim() !== "")
@@ -67,7 +75,7 @@ const Categories = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true, margin: "-100px" }}
               >
-                <Link to={`/product/${cat._id}`} className="card-image-link">
+                <Link to={linkTo} className="card-image-link">
                   <div className="card-image-box">
                     <img src={cat.image} alt={cat.name} />
                     <span className="card-tag">Mới</span>
@@ -77,7 +85,7 @@ const Categories = () => {
 
                 <div className="card-content-box">
                   <div className="card-content-inner">
-                    <Link to={`/product/${cat._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Link to={linkTo} style={{ textDecoration: 'none', color: 'inherit' }}>
                       <h3 className="product-title">{cat.name.toUpperCase()}</h3>
                     </Link>
                     
@@ -94,7 +102,7 @@ const Categories = () => {
                   </div>
 
                   <div className="card-action-bar">
-                    <Link to={`/product/${cat._id}`} className="card-link-btn">
+                    <Link to={linkTo} className="card-link-btn">
                       CHI TIẾT <ArrowUpRight size={18} />
                     </Link>
                   </div>
@@ -104,35 +112,7 @@ const Categories = () => {
           })}
         </div>
 
-        <div className="see-all-wrapper" style={{ marginTop: '4rem', display: 'flex', justifyContent: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <Link
-              to="/products"
-              className="btn-see-all"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.8rem',
-                backgroundColor: '#00AEEF',
-                color: '#fff',
-                padding: '1.2rem 2.5rem',
-                borderRadius: '50px',
-                fontWeight: '700',
-                fontSize: '1.1rem',
-                textDecoration: 'none',
-                boxShadow: '0 10px 20px rgba(0, 174, 239, 0.2)',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              Xem tất cả sản phẩm <ArrowUpRight size={20} />
-            </Link>
-          </motion.div>
-        </div>
+
       </div>
     </section>
   );
