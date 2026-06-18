@@ -299,7 +299,21 @@
   }
 
   .card-content-box {
-    padding: 1.8rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .card-content-box {
+    padding: 1.2rem;
+  }
+  
+  .card-content-inner .product-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-image-box {
+    height: 200px;
   }
 }
 

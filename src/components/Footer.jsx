@@ -48,7 +48,6 @@ const Footer = () => {
             <li><Link to="/"><ArrowRight size={14} /> Trang chủ</Link></li>
             <li><Link to="/products"><ArrowRight size={14} /> Sản phẩm</Link></li>
             <li><Link to="/about"><ArrowRight size={14} /> Tuyển đại lý</Link></li>
-            <li><Link to="/news"><ArrowRight size={14} /> Tin tức</Link></li>
           </ul>
         </div>
 

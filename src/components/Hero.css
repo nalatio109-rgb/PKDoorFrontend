@@ -2,9 +2,6 @@
   position: relative;
   height: 750px;
   min-height: 700px;
-  background-image: url('../assets/hero-bg.png');
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: center;
   color: var(--white);
@@ -13,9 +10,33 @@
   overflow: hidden;
 }
 
-.home-page .hero {
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../assets/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  animation: heroBgZoom 20s infinite alternate ease-in-out;
+}
+
+@keyframes heroBgZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+.home-page .hero::before {
   background-image: none;
   background-color: transparent;
+  animation: none;
 }
 
 
@@ -195,14 +216,14 @@
   .hero {
     height: auto;
     min-height: auto;
-    padding-top: 140px;
-    padding-bottom: 60px;
+    padding-top: 110px;
+    padding-bottom: 40px;
   }
 
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .hero-content {
@@ -212,29 +233,32 @@
   }
 
   .hero-title {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
   }
 
   .hero-btns {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
     gap: 1rem;
     width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
   }
 
   .hero-btns button {
     flex: 1;
-    font-size: 0.9rem;
-    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    padding: 1rem;
     justify-content: center;
     white-space: nowrap;
   }
 
   .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
     padding: 1.5rem 1rem;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
@@ -244,6 +268,10 @@
     width: 100%;
     max-width: none;
     margin-left: 0;
+  }
+  
+  .hero-stats .stat-item:last-child {
+    grid-column: 1 / -1;
   }
 
   .stat-divider {
@@ -264,28 +292,29 @@
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2.2rem;
-  }
-
-  .hero-btns {
-    gap: 0.5rem;
+    font-size: 2rem;
   }
 
   .hero-btns button {
-    font-size: 0.85rem;
-    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.8rem;
   }
 
   .hero-stats {
-    gap: 0.5rem;
-    padding: 1rem 0.5rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .hero-stats .stat-item:last-child {
+    grid-column: auto;
   }
 
   .stat-item strong {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .stat-item span {
-    font-size: 0.55rem;
+    font-size: 0.65rem;
   }
 }

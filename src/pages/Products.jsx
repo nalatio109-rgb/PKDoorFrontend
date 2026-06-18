@@ -63,13 +63,12 @@ const Products = () => {
           transition={{ duration: 1, ease: "easeOut" }}
         />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="hero-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', minHeight: '350px' }}>
+          <div className="hero-content-row">
             {/* Spacer for left image */}
-            <div style={{ flex: 1.5, minWidth: '400px' }}></div>
+            <div className="hero-spacer-left"></div>
 
             <motion.div
               className="hero-text"
-              style={{ flex: 1.5, textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '50px' }}
             >
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
@@ -100,7 +99,7 @@ const Products = () => {
             </motion.div>
 
             {/* Spacer for right swatches */}
-            <div style={{ flex: 0.5, minWidth: '150px' }}></div>
+            <div className="hero-spacer-right"></div>
           </div>
         </div>
 
@@ -109,12 +108,11 @@ const Products = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
         >
           <img
             src={mauImg}
             alt="Bảng màu cửa nhựa gỗ"
-            style={{ height: '100%', width: 'auto', objectFit: 'contain', objectPosition: 'right' }}
+            className="swatches-img"
           />
         </motion.div>
       </section>

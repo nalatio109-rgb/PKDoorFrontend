@@ -149,6 +149,12 @@
   }
   
   .structure-image img {
-    height: 400px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 640px) {
+  .structure-image img {
+    height: 280px;
   }
 }
