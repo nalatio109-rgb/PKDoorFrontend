@@ -23,7 +23,8 @@
 .section-title .line-dec {
     width: 60px;
     height: 4px;
-    background-color: #d11f26; /* Primary Red */
+    background-color: #d11f26;
+    /* Primary Red */
     margin: 0 auto;
 }
 
@@ -47,8 +48,8 @@
     background-size: contain;
     background-position: left center;
     background-repeat: no-repeat;
-    mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 85%);
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 85%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 85%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 85%);
     z-index: 1;
 }
 
@@ -61,8 +62,8 @@
 }
 
 .hero-spacer-left {
-    flex: 1.5;
-    min-width: 35%;
+    flex: 0.5;
+    min-width: 15%;
 }
 
 .hero-spacer-right {
@@ -152,19 +153,56 @@
     color: white;
     font-weight: 500;
     font-size: 1.05rem;
-    box-shadow: -2px -2px 10px rgba(0,0,0,0.15), -5px 5px 15px rgba(0,0,0,0.1);
+    box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.15), -5px 5px 15px rgba(0, 0, 0, 0.1);
     transform-origin: right bottom;
     right: 0px;
     bottom: 20px;
 }
 
 /* Fan Effect */
-.swatch-6 { background-color: #3b4249; transform: rotate(-5deg); z-index: 1; } /* Than củi */
-.swatch-5 { background-color: #792b2a; transform: rotate(7deg); z-index: 2; } /* Rượu vang */
-.swatch-4 { background-color: #8c5b36; transform: rotate(19deg); z-index: 3; } /* Sồi đậm */
-.swatch-3 { background-color: #f1ebd8; color: #1a1a1a; transform: rotate(31deg); z-index: 4; } /* Trắng ngà */
-.swatch-2 { background-color: #9a9b9b; transform: rotate(43deg); z-index: 5; } /* Xám tro */
-.swatch-1 { background-color: #5d3b2b; transform: rotate(55deg); z-index: 6; } /* Nâu gụ */
+.swatch-6 {
+    background-color: #3b4249;
+    transform: rotate(-5deg);
+    z-index: 1;
+}
+
+/* Than củi */
+.swatch-5 {
+    background-color: #792b2a;
+    transform: rotate(7deg);
+    z-index: 2;
+}
+
+/* Rượu vang */
+.swatch-4 {
+    background-color: #8c5b36;
+    transform: rotate(19deg);
+    z-index: 3;
+}
+
+/* Sồi đậm */
+.swatch-3 {
+    background-color: #f1ebd8;
+    color: #1a1a1a;
+    transform: rotate(31deg);
+    z-index: 4;
+}
+
+/* Trắng ngà */
+.swatch-2 {
+    background-color: #9a9b9b;
+    transform: rotate(43deg);
+    z-index: 5;
+}
+
+/* Xám tro */
+.swatch-1 {
+    background-color: #5d3b2b;
+    transform: rotate(55deg);
+    z-index: 6;
+}
+
+/* Nâu gụ */
 
 
 /* =========================================
@@ -186,10 +224,10 @@
     display: flex;
     background: #ffffff;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .premium-image-side {
@@ -208,14 +246,14 @@
     width: auto;
     object-fit: contain;
     z-index: 2;
-    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
 }
 
 .glow-effect {
     position: absolute;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(209,31,38,0.1) 0%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(circle, rgba(209, 31, 38, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -282,12 +320,29 @@
     box-shadow: 0 0 0 2px #d11f26;
 }
 
-.c-1 { background: #5d3b2b; }
-.c-2 { background: #9a9b9b; }
-.c-3 { background: #f1ebd8; }
-.c-4 { background: #8c5b36; }
-.c-5 { background: #792b2a; }
-.c-6 { background: #3b4249; }
+.c-1 {
+    background: #5d3b2b;
+}
+
+.c-2 {
+    background: #9a9b9b;
+}
+
+.c-3 {
+    background: #f1ebd8;
+}
+
+.c-4 {
+    background: #8c5b36;
+}
+
+.c-5 {
+    background: #792b2a;
+}
+
+.c-6 {
+    background: #3b4249;
+}
 
 .premium-features {
     display: grid;
@@ -313,7 +368,7 @@
 .feature-box:hover {
     background: #fff;
     border-color: #cbd5e1;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .f-icon {
@@ -376,16 +431,24 @@
     left: -100%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
     transform: skewX(-20deg);
     animation: shine 3s infinite;
     z-index: 1;
 }
 
 @keyframes shine {
-    0% { left: -100%; }
-    20% { left: 200%; }
-    100% { left: 200%; }
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 200%;
+    }
+
+    100% {
+        left: 200%;
+    }
 }
 
 /* Recommended Accessories */
@@ -441,7 +504,7 @@
 
 .rec-item-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     border-color: #cbd5e1;
 }
 
@@ -504,7 +567,8 @@
 ========================================= */
 .why-choose-us-section {
     padding: 60px 0;
-    background-color: #f1f5f9; /* Light gray-blue */
+    background-color: #f1f5f9;
+    /* Light gray-blue */
 }
 
 .benefits-bar {
@@ -520,7 +584,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .benefit-icon {
@@ -573,8 +637,13 @@
 }
 
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 10px)); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 10px));
+    }
 }
 
 .gallery-item {
@@ -591,7 +660,7 @@
     height: 180px;
     object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .gallery-name {
@@ -610,7 +679,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     color: #666;
     flex-shrink: 0;
 }
@@ -626,12 +695,15 @@
     .premium-product-card {
         flex-direction: column;
     }
+
     .premium-title {
         font-size: 1.8rem;
     }
+
     .premium-image-side {
         padding: 30px 20px;
     }
+
     .premium-info-side {
         padding: 30px 20px;
     }
@@ -645,10 +717,13 @@
         overflow: hidden !important;
         position: relative !important;
     }
+
     .hero-background-image {
-        width: 65% !important; /* Make it wider so cover scales it up */
+        width: 65% !important;
+        /* Make it wider so cover scales it up */
         background-position: left center !important;
     }
+
     .hero-content-row {
         min-height: 29.16vw !important;
         display: flex !important;
@@ -656,14 +731,17 @@
         justify-content: space-between !important;
         width: 100% !important;
     }
+
     .hero-spacer-left {
         flex: 1.5 !important;
         min-width: 35% !important;
     }
+
     .hero-spacer-right {
         flex: 0.5 !important;
         min-width: 15% !important;
     }
+
     .hero-text {
         flex: 2 !important;
         padding: 0 1.66vw !important;
@@ -672,23 +750,27 @@
         align-items: flex-start !important;
         text-align: left !important;
     }
+
     .hero-text h1 {
         font-size: 3.2vw !important;
         margin-bottom: 1vw !important;
         white-space: nowrap !important;
         line-height: 1.2 !important;
     }
+
     .hero-text p {
         font-size: 1.3vw !important;
         margin-bottom: 2vw !important;
         white-space: nowrap !important;
     }
+
     .btn-discover {
         padding: 0.8vw 2vw !important;
         font-size: 1.2vw !important;
         border-radius: 0.5vw !important;
         white-space: nowrap !important;
     }
+
     .hero-swatches-container {
         width: 29.16vw !important;
         position: absolute !important;
@@ -699,22 +781,27 @@
         align-items: center !important;
         justify-content: flex-end !important;
     }
+
     .swatches-img {
         height: 100% !important;
         width: auto !important;
         object-fit: contain !important;
         object-position: right !important;
     }
+
     .premium-features {
         grid-template-columns: 1fr;
     }
+
     .rec-items-grid {
         grid-template-columns: 1fr;
     }
+
     .benefits-bar {
         flex-direction: column;
         align-items: center;
     }
+
     .gallery-item {
         min-width: 150px;
     }
