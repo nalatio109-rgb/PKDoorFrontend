@@ -15,10 +15,17 @@ const Footer = () => {
           <p className="footer-slogan">
             Cửa nhựa gỗ Đà Nẵng - <span className="brand-pk">PK</span> <span className="brand-door">DOOR</span>. Giải pháp cửa toàn diện cho ngôi nhà hiện đại.
           </p>
-          <div className="social-links">
-            <a href="https://www.facebook.com/cuanhuagodanang" target="_blank" rel="noopener noreferrer" className="social-icon"><Share2 size={20} /></a>
-            <a href="https://zalo.me/0905943679" className="social-icon"><MessageCircle size={20} /></a>
-            <a href="mailto:contact@pkdoor.vn" className="social-icon"><Mail size={20} /></a>
+          <div className="footer-contact-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flexWrap: 'wrap', gap: '25px' }}>
+            <div className="social-links">
+              <a href="https://www.facebook.com/cuanhuagodanang" target="_blank" rel="noopener noreferrer" className="social-icon"><Share2 size={20} /></a>
+              <a href="https://zalo.me/0905943679" className="social-icon"><MessageCircle size={20} /></a>
+              <a href="mailto:contact@pkdoor.vn" className="social-icon"><Mail size={20} /></a>
+            </div>
+            
+            <div className="mobile-phone-footer">
+              <Phone size={18} className="text-blue" />
+              <a href="tel:0905943679">0905 943 679</a>
+            </div>
           </div>
         </div>
 

@@ -29,13 +29,16 @@ const Products = () => {
       .then(data => {
         const product = data.find(p => p.name.toLowerCase().includes('composite'));
         if (product) {
-          setMainProduct(prev => ({
-            ...prev,
-            _id: product._id,
-            name: product.name,
-            price: product.price,
-            image: product.image || prev.image,
-          }));
+            setMainProduct(prev => ({
+              ...prev,
+              _id: product._id,
+              name: product.name,
+              price: product.price,
+              image: product.image || prev.image,
+              badge: product.badge,
+              colors: product.colors,
+              features: product.features
+            }));
         }
       })
       .catch(err => console.log(err));
@@ -137,38 +140,71 @@ const Products = () => {
                 <div className="glow-effect"></div>
               </div>
               <div className="premium-info-side">
-                <div className="product-badge">Bán chạy nhất</div>
+                {mainProduct.badge ? (
+                  <div className="product-badge">{mainProduct.badge}</div>
+                ) : (
+                  <div className="product-badge">Bán chạy nhất</div>
+                )}
                 <h3 className="premium-title">{mainProduct.name}</h3>
 
                 <div className="premium-colors">
                   <span className="color-label">Màu sắc thịnh hành:</span>
                   <div className="color-options">
-                    <div className="color-circle c-1" title="Nâu gụ"></div>
-                    <div className="color-circle c-2" title="Xám tro"></div>
-                    <div className="color-circle c-3" title="Trắng ngà"></div>
-                    <div className="color-circle c-4" title="Sồi đậm"></div>
-                    <div className="color-circle c-5" title="Rượu vang"></div>
-                    <div className="color-circle c-6" title="Than củi"></div>
+                    {mainProduct.colors ? mainProduct.colors.split(',').map((c, i) => {
+                      const parts = c.split(':');
+                      if(parts.length === 2) {
+                        return <div key={i} className="color-circle" style={{ backgroundColor: parts[1].trim() }} title={parts[0].trim()}></div>
+                      }
+                      return null;
+                    }) : (
+                      <>
+                        <div className="color-circle c-1" title="Nâu gụ"></div>
+                        <div className="color-circle c-2" title="Xám tro"></div>
+                        <div className="color-circle c-3" title="Trắng ngà"></div>
+                        <div className="color-circle c-4" title="Sồi đậm"></div>
+                        <div className="color-circle c-5" title="Rượu vang"></div>
+                        <div className="color-circle c-6" title="Than củi"></div>
+                      </>
+                    )}
                   </div>
                 </div>
 
                 <div className="premium-features">
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <CheckCircle className="f-icon drop" size={24} />
-                    <span>Chống ẩm tuyệt đối</span>
-                  </motion.div>
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <VolumeX className="f-icon wave" size={24} />
-                    <span>Cách âm vượt trội</span>
-                  </motion.div>
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <Sun className="f-icon sun" size={24} />
-                    <span>Bền màu 10 năm</span>
-                  </motion.div>
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <Shield className="f-icon shield" size={24} />
-                    <span>Chống cháy lan</span>
-                  </motion.div>
+                  {mainProduct.features ? mainProduct.features.split('\n').filter(f=>f.trim()).map((feat, idx) => {
+                    const icons = [
+                      <CheckCircle className="f-icon drop" size={24} />,
+                      <VolumeX className="f-icon wave" size={24} />,
+                      <Sun className="f-icon sun" size={24} />,
+                      <Shield className="f-icon shield" size={24} />,
+                      <Leaf className="f-icon wave" size={24} />,
+                      <Wrench className="f-icon shield" size={24} />
+                    ];
+                    return (
+                      <motion.div key={idx} className="feature-box" whileHover={{ y: -5 }}>
+                        {icons[idx % icons.length]}
+                        <span>{feat.trim()}</span>
+                      </motion.div>
+                    );
+                  }) : (
+                    <>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <CheckCircle className="f-icon drop" size={24} />
+                        <span>Chống ẩm tuyệt đối</span>
+                      </motion.div>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <VolumeX className="f-icon wave" size={24} />
+                        <span>Cách âm vượt trội</span>
+                      </motion.div>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <Sun className="f-icon sun" size={24} />
+                        <span>Bền màu 10 năm</span>
+                      </motion.div>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <Shield className="f-icon shield" size={24} />
+                        <span>Chống cháy lan</span>
+                      </motion.div>
+                    </>
+                  )}
                 </div>
 
 

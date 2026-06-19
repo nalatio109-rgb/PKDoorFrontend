@@ -37,6 +37,9 @@ const PvcProducts = () => {
             name: product.name,
             price: product.price,
             image: product.image || prev.image,
+            badge: product.badge,
+            colors: product.colors,
+            features: product.features
           }));
         }
       })
@@ -63,22 +66,26 @@ const PvcProducts = () => {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
-          style={{ backgroundImage: `url(${phoiCuaImg})`, filter: 'none' }}
+          style={{ 
+            backgroundImage: `url(${phoiCuaImg})`, 
+            filter: 'none',
+            maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 70%)',
+            WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 70%)'
+          }}
         />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="hero-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', minHeight: '350px' }}>
-            <div style={{ flex: 1.5, minWidth: '400px' }}></div>
+          <div className="hero-content-row">
+            <div className="hero-spacer-left"></div>
 
             <motion.div
               className="hero-text"
-              style={{ flex: 1.5, textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '50px' }}
             >
               <motion.h1
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ type: "spring", bounce: 0.5, duration: 1, delay: 0.1 }}
               >
-                PHÔI CỬA NHỰA<br /><span className="highlight-red">PVC</span>
+                PHÔI CỬA<br />NHỰA <span className="highlight-red">PVC</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, x: -50 }}
@@ -98,7 +105,7 @@ const PvcProducts = () => {
               </motion.button>
             </motion.div>
 
-            <div style={{ flex: 0.5, minWidth: '150px' }}></div>
+            <div className="hero-spacer-right"></div>
           </div>
         </div>
 
@@ -107,12 +114,12 @@ const PvcProducts = () => {
           initial={{ opacity: 0, x: 150 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ type: "spring", bounce: 0.5, duration: 1.2, delay: 0.2 }}
-          style={{ position: 'absolute', right: '-2%', top: 0, bottom: 0, zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '28%' }}
         >
           <img
             src={phoicua1Img}
             alt="Phôi cửa nhựa PVC"
-            style={{ height: '100%', width: '100%', objectFit: 'cover', objectPosition: 'right', maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%)' }}
+            className="swatches-img"
+            style={{ maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%)', transform: 'translateX(45%) scale(1.6)', transformOrigin: 'right center' }}
           />
         </motion.div>
       </section>
@@ -138,35 +145,67 @@ const PvcProducts = () => {
                 <div className="glow-effect"></div>
               </div>
               <div className="premium-info-side">
-                <div className="product-badge" style={{ background: '#3498db' }}>Sản phẩm nổi bật</div>
+                {mainProduct.badge ? (
+                  <div className="product-badge" style={{ background: '#3498db' }}>{mainProduct.badge}</div>
+                ) : (
+                  <div className="product-badge" style={{ background: '#3498db' }}>Sản phẩm nổi bật</div>
+                )}
                 <h3 className="premium-title">{mainProduct.name}</h3>
 
                 <div className="premium-colors">
-                  <span className="color-label">Màu phôi tiêu chuẩn:</span>
+                  <span className="color-label">Màu sắc tiêu chuẩn:</span>
                   <div className="color-options">
-                    <div className="color-circle c-3" title="Trắng sứ"></div>
-                    <div className="color-circle c-2" title="Xám ghi"></div>
-                    <div className="color-circle" style={{ background: '#ecf0f1' }} title="Trắng ngà"></div>
+                    {mainProduct.colors ? mainProduct.colors.split(',').map((c, i) => {
+                      const parts = c.split(':');
+                      if(parts.length === 2) {
+                        return <div key={i} className="color-circle" style={{ backgroundColor: parts[1].trim() }} title={parts[0].trim()}></div>
+                      }
+                      return null;
+                    }) : (
+                      <>
+                        <div className="color-circle c-3" title="Trắng sứ"></div>
+                        <div className="color-circle c-2" title="Xám ghi"></div>
+                        <div className="color-circle" style={{ background: '#ecf0f1' }} title="Trắng ngà"></div>
+                      </>
+                    )}
                   </div>
                 </div>
 
                 <div className="premium-features">
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <CheckCircle className="f-icon drop" size={24} />
-                    <span>Lõi đặc PVC chắc chắn</span>
-                  </motion.div>
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <Leaf className="f-icon wave" size={24} />
-                    <span>Chịu lực, cách âm tốt</span>
-                  </motion.div>
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <Shield className="f-icon sun" size={24} />
-                    <span>Chống mối mọt 100%</span>
-                  </motion.div>
-                  <motion.div className="feature-box" whileHover={{ y: -5 }}>
-                    <Wrench className="f-icon shield" size={24} />
-                    <span>Dễ dàng cắt gọt thi công</span>
-                  </motion.div>
+                  {mainProduct.features ? mainProduct.features.split('\n').filter(f=>f.trim()).map((feat, idx) => {
+                    const icons = [
+                      <CheckCircle className="f-icon drop" size={24} />,
+                      <Leaf className="f-icon wave" size={24} />,
+                      <Shield className="f-icon sun" size={24} />,
+                      <Wrench className="f-icon shield" size={24} />,
+                      <VolumeX className="f-icon wave" size={24} />
+                    ];
+                    return (
+                      <motion.div key={idx} className="feature-box" whileHover={{ y: -5 }}>
+                        {icons[idx % icons.length]}
+                        <span>{feat.trim()}</span>
+                      </motion.div>
+                    );
+                  }) : (
+                    <>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <CheckCircle className="f-icon drop" size={24} />
+                        <span>Lõi đặc PVC chắc chắn</span>
+                      </motion.div>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <Leaf className="f-icon wave" size={24} />
+                        <span>Chịu lực, cách âm tốt</span>
+                      </motion.div>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <Shield className="f-icon sun" size={24} />
+                        <span>Chống mối mọt 100%</span>
+                      </motion.div>
+                      <motion.div className="feature-box" whileHover={{ y: -5 }}>
+                        <Wrench className="f-icon shield" size={24} />
+                        <span>Dễ dàng cắt gọt thi công</span>
+                      </motion.div>
+                    </>
+                  )}
                 </div>
 
 

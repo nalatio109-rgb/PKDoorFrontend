@@ -29,7 +29,9 @@ function Admin() {
         images: [], // Gallery images
         features: "",
         specs: "",
-        stock: 0
+        stock: 0,
+        badge: "",
+        colors: ""
     });
 
     const [products, setProducts] = useState([]);
@@ -220,7 +222,9 @@ function Admin() {
                 description: "",
                 image: "",
                 features: "",
-                specs: ""
+                specs: "",
+                badge: "",
+                colors: ""
             });
             setSelectedFiles([]);
             setPreviewUrls([]);
@@ -254,7 +258,9 @@ function Admin() {
             images: item.images || [],
             features: item.features || "",
             specs: item.specs || "",
-            stock: item.stock || 0
+            stock: item.stock || 0,
+            badge: item.badge || "",
+            colors: item.colors || ""
         });
         setPreviewUrls(item.images || [item.image]); // Hiện gallery cũ hoặc ảnh chính cũ
         setSelectedFiles([]);
@@ -284,7 +290,7 @@ function Admin() {
                         onClick={() => {
                             setTab("add");
                             setEditId(null);
-                            setForm({ name: "", price: "", description: "", image: "", images: [], features: "", specs: "" });
+                            setForm({ name: "", price: "", description: "", image: "", images: [], features: "", specs: "", badge: "", colors: "" });
                             setSelectedFiles([]);
                             setPreviewUrls([]);
                         }}
@@ -406,6 +412,26 @@ function Admin() {
                                 </div>
 
                                 <div className="form-group">
+                                    <label><Package size={16} /> Nhãn nổi bật (Badge)</label>
+                                    <input
+                                        name="badge"
+                                        placeholder="Ví dụ: BÁN CHẠY NHẤT"
+                                        value={form.badge}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label><Package size={16} /> Màu sắc (Định dạng: Tên:Mã màu, phẩy)</label>
+                                    <input
+                                        name="colors"
+                                        placeholder="Ví dụ: Trắng sứ:#ffffff, Xám ghi:#808080"
+                                        value={form.colors}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                <div className="form-group">
                                     <label><CheckCircle size={16} /> Đặc điểm nổi bật (Mỗi dòng một ý)</label>
                                     <textarea
                                         name="features"
@@ -506,9 +532,6 @@ function Admin() {
                     <div className="orders-section">
                         <div className="admin-header">
                             <h1>Quản lý đơn hàng</h1>
-                            <button className="btn-refresh" onClick={fetchOrders}>
-                                Làm mới danh sách
-                            </button>
                         </div>
 
                         <div className="orders-table-wrapper">
@@ -601,9 +624,6 @@ function Admin() {
                     <div className="orders-section">
                         <div className="admin-header">
                             <h1>Quản lý liên hệ</h1>
-                            <button className="btn-refresh" onClick={fetchContacts}>
-                                Làm mới danh sách
-                            </button>
                         </div>
 
                         <div className="orders-table-wrapper">
