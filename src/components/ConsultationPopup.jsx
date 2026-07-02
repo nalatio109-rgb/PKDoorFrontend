@@ -11,12 +11,12 @@ const ConsultationPopup = () => {
   const [doorColor, setDoorColor] = useState('');
 
   useEffect(() => {
-    // Show almost immediately when user enters the site
+    // Show after 12 seconds when user enters the site
     const timer = setTimeout(() => {
       if (!hasClosed) {
         setIsVisible(true);
       }
-    }, 500);
+    }, 12000);
     return () => clearTimeout(timer);
   }, [hasClosed]);
 
