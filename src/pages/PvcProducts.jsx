@@ -75,7 +75,7 @@ const PvcProducts = () => {
         />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="hero-content-row">
-            <div className="hero-spacer-left"></div>
+            <div className="hero-spacer-left" style={{ flex: 0.3 }}></div>
 
             <motion.div
               className="hero-text"
@@ -105,7 +105,7 @@ const PvcProducts = () => {
               </motion.button>
             </motion.div>
 
-            <div className="hero-spacer-right"></div>
+            <div className="hero-spacer-right" style={{ flex: 1.5 }}></div>
           </div>
         </div>
 

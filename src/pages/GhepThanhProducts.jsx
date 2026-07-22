@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
-import { ShoppingCart, CheckCircle, VolumeX, Sun, Leaf, Shield, Wrench, PhoneCall, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ShoppingCart, CheckCircle, VolumeX, Sun, Leaf, Shield, Wrench, PhoneCall, ChevronRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { flyToCart } from '../utils/animations';
 import { Link } from 'react-router-dom';
@@ -12,18 +12,14 @@ import cuamauvangImg from '../assets/cuamauvang.png';
 import taynamcuaImg from '../assets/taynamcua.png';
 import { API_URL } from '../config';
 
-const Products = () => {
+const GhepThanhProducts = () => {
   const { addToCart } = useCart();
 
-  const [activeImage, setActiveImage] = useState("");
-  const [activeColorIndex, setActiveColorIndex] = useState(0);
-
   const [mainProduct, setMainProduct] = useState({
-    _id: "composite-main",
-    name: "Cửa Nhựa Gỗ Composite",
-    price: 390000,
+    _id: "ghep-thanh-main",
+    name: "Cửa Nhựa Ghép Thanh Vân Gỗ",
+    price: 450000,
     image: cuamauvangImg,
-    images: []
   });
 
   useEffect(() => {
@@ -31,7 +27,7 @@ const Products = () => {
     fetch(`${API_URL}/products`)
       .then(res => res.json())
       .then(data => {
-        const product = data.find(p => p.name.toLowerCase().includes('composite'));
+        const product = data.find(p => p.name.toLowerCase().includes('ghép thanh') || p.name.toLowerCase().includes('vân gỗ'));
         if (product) {
             setMainProduct(prev => ({
               ...prev,
@@ -39,12 +35,10 @@ const Products = () => {
               name: product.name,
               price: product.price,
               image: product.image || prev.image,
-              images: product.images || [],
               badge: product.badge,
               colors: product.colors,
               features: product.features
             }));
-            setActiveImage(product.image || cuamauvangImg);
         }
       })
       .catch(err => console.log(err));
@@ -73,7 +67,6 @@ const Products = () => {
         />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="hero-content-row">
-            {/* Spacer for left image */}
             <div className="hero-spacer-left"></div>
 
             <motion.div
@@ -85,7 +78,7 @@ const Products = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                CỬA NHỰA GỖ<br /><span className="highlight-red">COMPOSITE</span>
+                CỬA NHỰA GHÉP<br /><span className="highlight-red">THANH VÂN GỖ</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
@@ -93,7 +86,7 @@ const Products = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                Hơn 8 màu sắc - Bền bỉ theo năm tháng
+                Vẻ đẹp tự nhiên - Độ bền vượt thời gian
               </motion.p>
               <motion.button
                 className="btn-discover"
@@ -107,7 +100,6 @@ const Products = () => {
               </motion.button>
             </motion.div>
 
-            {/* Spacer for right swatches */}
             <div className="hero-spacer-right"></div>
           </div>
         </div>
@@ -136,39 +128,15 @@ const Products = () => {
 
           <div className="product-showcase">
             <div className="premium-product-card">
-              <div className="premium-image-side" style={{ flexDirection: 'column' }}>
+              <div className="premium-image-side">
                 <motion.img
-                  src={activeImage || mainProduct.image}
-                  alt="Cửa Nhựa Gỗ Composite"
+                  src={mainProduct.image}
+                  alt="Cửa Nhựa Ghép Thanh Vân Gỗ"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 />
-              {/* Thumbnails */}
-              <div className="product-thumbnails" style={{ display: 'flex', gap: '10px', marginTop: '15px', justifyContent: 'center', flexWrap: 'wrap', padding: '0 20px', paddingBottom: '20px' }}>
-                {Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean))).map((img, idx) => (
-                  <img 
-                    key={idx}
-                    src={img}
-                    alt={`Thumbnail ${idx}`}
-                    style={{ 
-                      width: '60px', 
-                      height: '60px', 
-                      objectFit: 'cover', 
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      border: activeColorIndex === idx ? '3px solid var(--primary-color)' : '1px solid #ddd',
-                      opacity: activeColorIndex === idx ? 1 : 0.6,
-                      transition: 'all 0.3s ease'
-                    }}
-                    onClick={() => {
-                      setActiveImage(img);
-                      setActiveColorIndex(idx);
-                    }}
-                  />
-                ))}
+                <div className="glow-effect"></div>
               </div>
-              </div>
-              
               <div className="premium-info-side">
                 {mainProduct.badge ? (
                   <div className="product-badge">{mainProduct.badge}</div>
@@ -183,52 +151,18 @@ const Products = () => {
                     {mainProduct.colors ? mainProduct.colors.split(',').map((c, i) => {
                       const parts = c.split(':');
                       if(parts.length === 2) {
-                        return (
-                          <div 
-                            key={i} 
-                            className="color-circle" 
-                            style={{ 
-                              backgroundColor: parts[1].trim(),
-                              boxShadow: activeColorIndex === i ? `0 0 0 3px #fff, 0 0 0 5px ${parts[1].trim()}` : 'none',
-                              transform: activeColorIndex === i ? 'scale(1.2)' : 'none',
-                              cursor: 'pointer',
-                              transition: 'all 0.2s ease',
-                              margin: activeColorIndex === i ? '0 5px' : '0'
-                            }} 
-                            title={parts[0].trim()}
-                            onClick={() => {
-                              setActiveColorIndex(i);
-                              const allImages = Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean)));
-                              if (allImages[i]) {
-                                setActiveImage(allImages[i]);
-                              }
-                            }}
-                          ></div>
-                        );
+                        return <div key={i} className="color-circle" style={{ backgroundColor: parts[1].trim() }} title={parts[0].trim()}></div>
                       }
                       return null;
                     }) : (
-                      ['#3e2723', '#757575', '#f5f5dc', '#8b4513', '#722f37', '#36454f'].map((color, i) => (
-                        <div 
-                          key={i} 
-                          className="color-circle" 
-                          style={{ 
-                            backgroundColor: color,
-                            boxShadow: activeColorIndex === i ? `0 0 0 3px #fff, 0 0 0 5px ${color}` : 'none',
-                            transform: activeColorIndex === i ? 'scale(1.2)' : 'none',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s ease',
-                            margin: activeColorIndex === i ? '0 5px' : '0'
-                          }} 
-                          onClick={() => {
-                            setActiveColorIndex(i);
-                            const allImages = Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean)));
-                            if (allImages[i]) {
-                              setActiveImage(allImages[i]);
-                            }
-                          }}
-                        ></div>
-                      ))
+                      <>
+                        <div className="color-circle c-1" title="Vân gỗ sồi"></div>
+                        <div className="color-circle c-2" title="Vân gỗ xoan đào"></div>
+                        <div className="color-circle c-3" title="Vân gỗ óc chó"></div>
+                        <div className="color-circle c-4" title="Vân gỗ hương"></div>
+                        <div className="color-circle c-5" title="Vân gỗ gõ đỏ"></div>
+                        <div className="color-circle c-6" title="Vân gỗ mun"></div>
+                      </>
                     )}
                   </div>
                 </div>
@@ -261,17 +195,15 @@ const Products = () => {
                       </motion.div>
                       <motion.div className="feature-box" whileHover={{ y: -5 }}>
                         <Sun className="f-icon sun" size={24} />
-                        <span>Bền màu 10 năm</span>
+                        <span>Vân gỗ chân thật 99%</span>
                       </motion.div>
                       <motion.div className="feature-box" whileHover={{ y: -5 }}>
                         <Shield className="f-icon shield" size={24} />
-                        <span>Chống cháy lan</span>
+                        <span>Chống mối mọt 100%</span>
                       </motion.div>
                     </>
                   )}
                 </div>
-
-
 
                 <motion.button
                   className="btn-premium-order"
@@ -402,4 +334,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default GhepThanhProducts;

@@ -159,13 +159,21 @@ const ProductDetails = () => {
                 <h3 className="product-title">{product.name}</h3>
                 
                 <div className="color-options">
-                   <div className="color-circle c-1"></div>
-                   <div className="color-circle c-2"></div>
-                   <div className="color-circle c-3"></div>
-                   <div className="color-circle c-4"></div>
-                   <div className="color-circle c-5"></div>
-                   <div className="color-circle c-6"></div>
-                   <div className="color-circle c-7"></div>
+                   {product.colors ? (
+                     product.colors.split(",").map((c, idx) => {
+                       const [cName, cHex] = c.split(":");
+                       return (
+                         <div 
+                           key={idx} 
+                           className="color-circle" 
+                           style={{ backgroundColor: cHex || "#ccc" }}
+                           title={cName}
+                         ></div>
+                       );
+                     })
+                   ) : (
+                     <div style={{ fontSize: "14px", color: "#64748b" }}>Màu sắc mặc định</div>
+                   )}
                 </div>
 
                 <div className="feature-icons-grid">
@@ -257,12 +265,20 @@ const ProductDetails = () => {
           <div className="gallery-carousel">
             <button className="carousel-btn left"><ChevronLeft size={24} /></button>
             <div className="gallery-track">
-              {galleryImages.map((img, idx) => (
-                <div className="gallery-item" key={idx}>
-                  <img src={img.src} alt={img.name} />
-                  <div className="gallery-name">{img.name}</div>
-                </div>
-              ))}
+              {product.images && product.images.length > 0 ? (
+                product.images.map((img, idx) => (
+                  <div className="gallery-item" key={idx} onClick={() => setActiveImage(img)}>
+                    <img src={img} alt={`Gallery ${idx}`} />
+                  </div>
+                ))
+              ) : (
+                galleryImages.map((img, idx) => (
+                  <div className="gallery-item" key={idx}>
+                    <img src={img.src} alt={img.name} />
+                    <div className="gallery-name">{img.name}</div>
+                  </div>
+                ))
+              )}
             </div>
             <button className="carousel-btn right"><ChevronRight size={24} /></button>
           </div>

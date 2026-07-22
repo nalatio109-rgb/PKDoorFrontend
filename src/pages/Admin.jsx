@@ -43,6 +43,38 @@ function Admin() {
     const [contacts, setContacts] = useState([]);
     const [selectedContact, setSelectedContact] = useState(null);
 
+    const [tempColorName, setTempColorName] = useState("");
+    const [tempColorHex, setTempColorHex] = useState("#000000");
+
+    const handleAddColor = () => {
+        if (!tempColorName.trim()) return;
+        const newColorStr = `${tempColorName.trim()}:${tempColorHex}`;
+        const updatedColors = form.colors ? `${form.colors},${newColorStr}` : newColorStr;
+        setForm({ ...form, colors: updatedColors });
+        setTempColorName("");
+        setTempColorHex("#000000");
+    };
+
+    const handleRemoveColor = (indexToRemove) => {
+        if (!form.colors) return;
+        const colorArray = form.colors.split(",").map(c => c.trim()).filter(c => c);
+        const updatedArray = colorArray.filter((_, idx) => idx !== indexToRemove);
+        setForm({ ...form, colors: updatedArray.join(",") });
+    };
+
+    const handleEditColor = (indexToEdit) => {
+        if (!form.colors) return;
+        const colorArray = form.colors.split(",").map(c => c.trim()).filter(c => c);
+        const colorToEdit = colorArray[indexToEdit];
+        if (colorToEdit) {
+            const [cName, cHex] = colorToEdit.split(":");
+            setTempColorName(cName || "");
+            setTempColorHex(cHex || "#000000");
+            const updatedArray = colorArray.filter((_, idx) => idx !== indexToEdit);
+            setForm({ ...form, colors: updatedArray.join(",") });
+        }
+    };
+
     // lấy danh sách tin nhắn liên hệ
     const fetchContacts = async () => {
         try {
@@ -422,13 +454,59 @@ function Admin() {
                                 </div>
 
                                 <div className="form-group">
-                                    <label><Package size={16} /> Màu sắc (Định dạng: Tên:Mã màu, phẩy)</label>
-                                    <input
-                                        name="colors"
-                                        placeholder="Ví dụ: Trắng sứ:#ffffff, Xám ghi:#808080"
-                                        value={form.colors}
-                                        onChange={handleChange}
-                                    />
+                                    <label><Package size={16} /> Màu sắc</label>
+                                    <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+                                        <input
+                                            type="text"
+                                            placeholder="Tên màu (VD: Trắng sứ)"
+                                            value={tempColorName}
+                                            onChange={(e) => setTempColorName(e.target.value)}
+                                            style={{ flex: 1 }}
+                                        />
+                                        <input
+                                            type="color"
+                                            value={tempColorHex}
+                                            onChange={(e) => setTempColorHex(e.target.value)}
+                                            style={{ width: "50px", height: "40px", padding: "0", cursor: "pointer" }}
+                                        />
+                                        <button 
+                                            type="button" 
+                                            onClick={handleAddColor}
+                                            style={{ padding: "0 15px", background: "var(--admin-accent)", color: "#fff", borderRadius: "4px", border: "none", cursor: "pointer" }}
+                                        >
+                                            Thêm màu
+                                        </button>
+                                    </div>
+                                    <input type="hidden" name="colors" value={form.colors} />
+                                    {form.colors && (
+                                        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "10px" }}>
+                                            {form.colors.split(",").map((c, idx) => {
+                                                const [cName, cHex] = c.split(":");
+                                                return (
+                                                    <div key={idx} style={{ display: "flex", alignItems: "center", gap: "5px", background: "#f1f5f9", padding: "5px 12px", borderRadius: "20px", border: "1px solid #cbd5e1" }}>
+                                                        <div style={{ width: "16px", height: "16px", borderRadius: "50%", background: cHex || "#ccc", border: "1px solid #94a3b8" }}></div>
+                                                        <span style={{ fontSize: "14px", marginRight: "5px" }}>{cName}</span>
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => handleEditColor(idx)}
+                                                            style={{ background: "transparent", border: "none", color: "#3b82f6", cursor: "pointer", display: "flex", alignItems: "center", padding: "2px" }}
+                                                            title="Sửa màu"
+                                                        >
+                                                            <Edit3 size={14} />
+                                                        </button>
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => handleRemoveColor(idx)}
+                                                            style={{ background: "transparent", border: "none", color: "#ef4444", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", padding: "0" }}
+                                                            title="Xóa màu"
+                                                        >
+                                                            &times;
+                                                        </button>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="form-group">

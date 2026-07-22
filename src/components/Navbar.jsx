@@ -8,7 +8,6 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cartCount } = useCart();
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50 || alwaysSolid);
@@ -39,6 +38,7 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
             <ul className="dropdown-menu">
               <li><Link to="/products/composite">CỬA NHỰA GỖ COMPOSITE</Link></li>
               <li><Link to="/products/pvc">PHÔI CỬA NHỰA PVC</Link></li>
+              <li><Link to="/products/ghep-thanh">CỬA NHỰA GHÉP THANH VÂN GỖ</Link></li>
             </ul>
           </li>
 

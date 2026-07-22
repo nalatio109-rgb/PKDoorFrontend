@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Products from "./pages/Products";
 import PvcProducts from "./pages/PvcProducts";
+import GhepThanhProducts from "./pages/GhepThanhProducts";
 import ProductDetails from "./pages/ProductDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/composite" element={<Products />} />
           <Route path="/products/pvc" element={<PvcProducts />} />
+          <Route path="/products/ghep-thanh" element={<GhepThanhProducts />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
