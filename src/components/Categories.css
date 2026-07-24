@@ -232,6 +232,27 @@
   overflow: hidden;
 }
 
+.product-desc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.desc-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.desc-list-item .check-icon {
+  color: var(--primary-red);
+  font-weight: bold;
+}
+
 .product-specs {
   display: flex;
   flex-direction: column;

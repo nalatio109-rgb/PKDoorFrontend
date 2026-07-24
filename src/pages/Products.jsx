@@ -148,6 +148,7 @@ const Products = () => {
                 {Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean))).map((img, idx) => (
                   <img 
                     key={idx}
+                    id={`thumb-${idx}`}
                     src={img}
                     alt={`Thumbnail ${idx}`}
                     style={{ 
@@ -157,8 +158,8 @@ const Products = () => {
                       objectFit: 'cover', 
                       borderRadius: '8px',
                       cursor: 'pointer',
-                      border: activeColorIndex === idx ? '3px solid var(--primary-color)' : '1px solid #ddd',
-                      opacity: activeColorIndex === idx ? 1 : 0.6,
+                      border: activeImage === img ? '3px solid var(--primary-color)' : '1px solid #ddd',
+                      opacity: activeImage === img ? 1 : 0.6,
                       transition: 'all 0.3s ease',
                       flexShrink: 0
                     }}
@@ -210,6 +211,12 @@ const Products = () => {
                               const allImages = Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean)));
                               if (allImages[i]) {
                                 setActiveImage(allImages[i]);
+                                setTimeout(() => {
+                                  const thumb = document.getElementById(`thumb-${i}`);
+                                  if (thumb) {
+                                    thumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                                  }
+                                }, 50);
                               }
                             }}
                           ></div>
@@ -233,6 +240,12 @@ const Products = () => {
                             const allImages = Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean)));
                             if (allImages[i]) {
                               setActiveImage(allImages[i]);
+                              setTimeout(() => {
+                                const thumb = document.getElementById(`thumb-${i}`);
+                                if (thumb) {
+                                  thumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                                }
+                              }, 50);
                             }
                           }}
                         ></div>

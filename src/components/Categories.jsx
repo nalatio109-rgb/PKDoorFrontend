@@ -94,7 +94,18 @@ const Categories = () => {
                       <h3 className="product-title">{cat.name.toUpperCase()}</h3>
                     </Link>
                     
-                    <p className="product-desc">{cat.description}</p>
+                    {cat.description && (cat.description.includes('✓') || cat.description.includes('✔')) ? (
+                      <div className="product-desc-list">
+                        {cat.description.split(/[✓✔]/).filter(d => d.trim()).map((item, idx) => (
+                          <div key={idx} className="desc-list-item">
+                            <span className="check-icon">✓</span>
+                            <span>{item.trim()}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="product-desc" style={{ whiteSpace: 'pre-line' }}>{cat.description}</p>
+                    )}
                     
                     <div className="product-specs">
                       {specsToShow.map((spec, sIdx) => (
