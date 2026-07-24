@@ -20,14 +20,22 @@ const GhepThanhProducts = () => {
     name: "Cửa Nhựa Ghép Thanh Vân Gỗ",
     price: 450000,
     image: cuamauvangImg,
+    images: []
   });
+
+  const [activeImage, setActiveImage] = useState("");
+  const [activeColorIndex, setActiveColorIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch(`${API_URL}/products`)
       .then(res => res.json())
       .then(data => {
-        const product = data.find(p => p.name.toLowerCase().includes('ghép thanh') || p.name.toLowerCase().includes('vân gỗ'));
+        const normalize = (str) => (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        const product = data.find(p => {
+          const normName = normalize(p.name);
+          return normName.includes('ghep thanh') || normName.includes('van go');
+        });
         if (product) {
             setMainProduct(prev => ({
               ...prev,
@@ -35,10 +43,13 @@ const GhepThanhProducts = () => {
               name: product.name,
               price: product.price,
               image: product.image || prev.image,
+              images: product.images,
               badge: product.badge,
               colors: product.colors,
-              features: product.features
+              features: product.features,
+              description: product.description
             }));
+            setActiveImage(product.image || cuamauvangImg);
         }
       })
       .catch(err => console.log(err));
@@ -78,7 +89,8 @@ const GhepThanhProducts = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                CỬA NHỰA GHÉP<br /><span className="highlight-red">THANH VÂN GỖ</span>
+                <span style={{ display: 'block', marginBottom: '10px' }}>CỬA NHỰA GHÉP</span>
+                <span className="highlight-red" style={{ display: 'block' }}>THANH VÂN GỖ</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
@@ -128,14 +140,39 @@ const GhepThanhProducts = () => {
 
           <div className="product-showcase">
             <div className="premium-product-card">
-              <div className="premium-image-side">
+              <div className="premium-image-side" style={{ flexDirection: 'column' }}>
                 <motion.img
-                  src={mainProduct.image}
+                  src={activeImage || mainProduct.image}
                   alt="Cửa Nhựa Ghép Thanh Vân Gỗ"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 />
-                <div className="glow-effect"></div>
+              {/* Thumbnails */}
+              <div className="product-thumbnails" style={{ display: 'flex', gap: '10px', marginTop: '15px', justifyContent: 'flex-start', flexWrap: 'nowrap', padding: '5px', paddingBottom: '15px', overflowX: 'auto', maxWidth: '100%' }}>
+                {Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean))).map((img, idx) => (
+                  <img 
+                    key={idx}
+                    src={img}
+                    alt={`Thumbnail ${idx}`}
+                    style={{ 
+                      width: '60px', 
+                      height: '60px', 
+                      minWidth: '60px',
+                      objectFit: 'cover', 
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      border: (activeImage || mainProduct.image) === img ? '3px solid var(--primary-color)' : '1px solid #ddd',
+                      opacity: (activeImage || mainProduct.image) === img ? 1 : 0.6,
+                      transition: 'all 0.3s ease',
+                      flexShrink: 0
+                    }}
+                    onClick={(e) => {
+                      setActiveImage(img);
+                      e.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }}
+                  />
+                ))}
+              </div>
               </div>
               <div className="premium-info-side">
                 {mainProduct.badge ? (
@@ -146,23 +183,62 @@ const GhepThanhProducts = () => {
                 <h3 className="premium-title">{mainProduct.name}</h3>
 
                 <div className="premium-colors">
-                  <span className="color-label">Màu sắc thịnh hành:</span>
+                  <span className="color-label" style={{ marginBottom: '15px' }}>
+                    Màu sắc đang chọn:{' '}
+                    <strong style={{ color: '#d11f26', marginLeft: '5px', fontSize: '1.05rem' }}>
+                      {mainProduct.colors 
+                        ? (mainProduct.colors.split(',')[activeColorIndex] ? mainProduct.colors.split(',')[activeColorIndex].split(':')[0].trim() : `Màu ${activeColorIndex + 1}`)
+                        : `Màu ${activeColorIndex + 1}`}
+                    </strong>
+                  </span>
                   <div className="color-options">
                     {mainProduct.colors ? mainProduct.colors.split(',').map((c, i) => {
                       const parts = c.split(':');
                       if(parts.length === 2) {
-                        return <div key={i} className="color-circle" style={{ backgroundColor: parts[1].trim() }} title={parts[0].trim()}></div>
+                        return (
+                          <div 
+                            key={i} 
+                            className="color-circle" 
+                            style={{ 
+                              backgroundColor: parts[1].trim(),
+                              boxShadow: activeColorIndex === i ? `0 0 0 3px #fff, 0 0 0 5px ${parts[1].trim()}` : 'none',
+                              transform: activeColorIndex === i ? 'scale(1.2)' : 'none',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease'
+                            }} 
+                            title={parts[0].trim()}
+                            onClick={() => {
+                              setActiveColorIndex(i);
+                              const allImages = Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean)));
+                              if (allImages[i]) {
+                                setActiveImage(allImages[i]);
+                              }
+                            }}
+                          ></div>
+                        );
                       }
                       return null;
                     }) : (
-                      <>
-                        <div className="color-circle c-1" title="Vân gỗ sồi"></div>
-                        <div className="color-circle c-2" title="Vân gỗ xoan đào"></div>
-                        <div className="color-circle c-3" title="Vân gỗ óc chó"></div>
-                        <div className="color-circle c-4" title="Vân gỗ hương"></div>
-                        <div className="color-circle c-5" title="Vân gỗ gõ đỏ"></div>
-                        <div className="color-circle c-6" title="Vân gỗ mun"></div>
-                      </>
+                      ['#3e2723', '#757575', '#f5f5dc', '#8b4513', '#722f37', '#36454f'].map((color, i) => (
+                        <div 
+                          key={i} 
+                          className="color-circle" 
+                          style={{ 
+                            backgroundColor: color,
+                            boxShadow: activeColorIndex === i ? `0 0 0 3px #fff, 0 0 0 5px ${color}` : 'none',
+                            transform: activeColorIndex === i ? 'scale(1.2)' : 'none',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease'
+                          }} 
+                          onClick={() => {
+                            setActiveColorIndex(i);
+                            const allImages = Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean)));
+                            if (allImages[i]) {
+                              setActiveImage(allImages[i]);
+                            }
+                          }}
+                        ></div>
+                      ))
                     )}
                   </div>
                 </div>
@@ -210,8 +286,16 @@ const GhepThanhProducts = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={(e) => {
-                    addToCart(mainProduct);
-                    flyToCart(e, mainProduct.image);
+                    let selectedColorName = `Màu ${activeColorIndex + 1}`;
+                    if (mainProduct.colors) {
+                      const colors = mainProduct.colors.split(',');
+                      if (colors[activeColorIndex]) {
+                        selectedColorName = colors[activeColorIndex].split(':')[0].trim();
+                      }
+                    }
+                    const imgToCart = activeImage || mainProduct.image;
+                    addToCart({ ...mainProduct, image: imgToCart, selectedColor: selectedColorName });
+                    flyToCart(e, imgToCart);
                   }}
                 >
                   <span className="btn-text">ĐẶT HÀNG NGAY</span>
@@ -224,7 +308,7 @@ const GhepThanhProducts = () => {
             <div className="recommended-accessories">
               <div className="rec-header">
                 <h3>Phụ kiện khuyên dùng</h3>
-                <Link to="/products" className="view-all-link">Xem tất cả <ChevronRight size={16} /></Link>
+                <Link to="/san-pham" className="view-all-link">Xem tất cả <ChevronRight size={16} /></Link>
               </div>
               <div className="rec-items-grid">
                 <div className="rec-item-card">
@@ -317,12 +401,21 @@ const GhepThanhProducts = () => {
           <div className="gallery-carousel">
             <div className="gallery-marquee-container">
               <div className="gallery-track-infinite">
-                {[...galleryImages, ...galleryImages].map((img, idx) => (
-                  <div className="gallery-item" key={idx}>
-                    <img src={img.src} alt={img.name} />
-                    <div className="gallery-name">{img.name}</div>
-                  </div>
-                ))}
+                {mainProduct.images && mainProduct.images.length > 0 ? (
+                  [...mainProduct.images, ...mainProduct.images].map((img, idx) => (
+                    <div className="gallery-item" key={idx}>
+                      <img src={img} alt={`${mainProduct.name} ${idx}`} />
+                      <div className="gallery-name">Hình ảnh thực tế {(idx % mainProduct.images.length) + 1}</div>
+                    </div>
+                  ))
+                ) : (
+                  [...galleryImages, ...galleryImages].map((img, idx) => (
+                    <div className="gallery-item" key={idx}>
+                      <img src={img.src} alt={img.name} />
+                      <div className="gallery-name">{img.name}</div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>

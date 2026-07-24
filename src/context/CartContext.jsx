@@ -16,7 +16,8 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = (product) => {
         setCartItems(prevItems => {
-            const existingItem = prevItems.find(item => item._id === product._id);
+            const cartItemId = product.selectedColor ? `${product._id}-${product.selectedColor}` : product._id;
+            const existingItem = prevItems.find(item => (item.cartItemId || item._id) === cartItemId);
             if (existingItem) {
                 // Kiểm tra nếu số lượng trong giỏ đã đạt giới hạn tồn kho
                 if (existingItem.quantity >= product.stock) {
@@ -24,7 +25,7 @@ export const CartProvider = ({ children }) => {
                     return prevItems;
                 }
                 return prevItems.map(item =>
-                    item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
+                    (item.cartItemId || item._id) === cartItemId ? { ...item, quantity: item.quantity + 1 } : item
                 );
             }
             // Nếu sản phẩm chưa có trong giỏ, kiểm tra xem còn hàng không
@@ -32,17 +33,17 @@ export const CartProvider = ({ children }) => {
                 alert(`⚠️ Sản phẩm "${product.name}" hiện đã hết hàng.`);
                 return prevItems;
             }
-            return [...prevItems, { ...product, quantity: 1 }];
+            return [...prevItems, { ...product, cartItemId, quantity: 1 }];
         });
     };
 
-    const removeFromCart = (id) => {
-        setCartItems(prevItems => prevItems.filter(item => item._id !== id));
+    const removeFromCart = (cartItemId) => {
+        setCartItems(prevItems => prevItems.filter(item => (item.cartItemId || item._id) !== cartItemId));
     };
 
-    const updateQuantity = (id, delta) => {
+    const updateQuantity = (cartItemId, delta) => {
         setCartItems(prevItems => prevItems.map(item => {
-            if (item._id === id) {
+            if ((item.cartItemId || item._id) === cartItemId) {
                 const newQuantity = item.quantity + delta;
                 
                 // Kiểm tra giới hạn dưới (ít nhất 1)

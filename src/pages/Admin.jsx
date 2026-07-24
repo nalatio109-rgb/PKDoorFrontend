@@ -294,7 +294,8 @@ function Admin() {
             badge: item.badge || "",
             colors: item.colors || ""
         });
-        setPreviewUrls(item.images || [item.image]); // Hiện gallery cũ hoặc ảnh chính cũ
+        const imagesToPreview = item.images && item.images.length > 0 ? item.images : (item.image ? [item.image] : []);
+        setPreviewUrls(imagesToPreview); // Hiện gallery cũ hoặc ảnh chính cũ
         setSelectedFiles([]);
         setEditId(item._id);
         setTab("add");
@@ -619,6 +620,7 @@ function Admin() {
                                         <th>Ngày đặt</th>
                                         <th>Khách hàng</th>
                                         <th>Số điện thoại</th>
+                                        <th>Sản phẩm</th>
                                         <th>Tổng tiền</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
@@ -630,6 +632,13 @@ function Admin() {
                                             <td>{new Date(order.createdAt).toLocaleDateString('vi-VN')}</td>
                                             <td><strong>{order.customerInfo.name}</strong></td>
                                             <td>{order.customerInfo.phone}</td>
+                                            <td>
+                                                {order.items && order.items.length > 0 ? (
+                                                    <div style={{ fontSize: '0.85rem', color: '#475569', maxWidth: '220px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={order.items.map(item => `${item.quantity}x ${item.name}`).join(', ')}>
+                                                        {order.items.map(item => `${item.quantity}x ${item.name}`).join(', ')}
+                                                    </div>
+                                                ) : "Không có SP"}
+                                            </td>
                                             <td><span className="price-bold">{order.totalAmount.toLocaleString()}đ</span></td>
                                             <td>
                                                 <select 

@@ -19,15 +19,15 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/composite" element={<Products />} />
-          <Route path="/products/pvc" element={<PvcProducts />} />
-          <Route path="/products/ghep-thanh" element={<GhepThanhProducts />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/gioi-thieu" element={<About />} />
+          <Route path="/lien-he" element={<Contact />} />
+          <Route path="/quan-tri" element={<Admin />} />
+          <Route path="/san-pham" element={<Products />} />
+          <Route path="/san-pham/composite" element={<Products />} />
+          <Route path="/san-pham/pvc" element={<PvcProducts />} />
+          <Route path="/san-pham/ghep-thanh" element={<GhepThanhProducts />} />
+          <Route path="/san-pham-chi-tiet/:id" element={<ProductDetails />} />
+          <Route path="/gio-hang" element={<CartPage />} />
         </Routes>
         <FloatingContact />
       </Router>

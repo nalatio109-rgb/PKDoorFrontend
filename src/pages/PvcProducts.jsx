@@ -152,24 +152,7 @@ const PvcProducts = () => {
                 )}
                 <h3 className="premium-title">{mainProduct.name}</h3>
 
-                <div className="premium-colors">
-                  <span className="color-label">Màu sắc tiêu chuẩn:</span>
-                  <div className="color-options">
-                    {mainProduct.colors ? mainProduct.colors.split(',').map((c, i) => {
-                      const parts = c.split(':');
-                      if(parts.length === 2) {
-                        return <div key={i} className="color-circle" style={{ backgroundColor: parts[1].trim() }} title={parts[0].trim()}></div>
-                      }
-                      return null;
-                    }) : (
-                      <>
-                        <div className="color-circle c-3" title="Trắng sứ"></div>
-                        <div className="color-circle c-2" title="Xám ghi"></div>
-                        <div className="color-circle" style={{ background: '#ecf0f1' }} title="Trắng ngà"></div>
-                      </>
-                    )}
-                  </div>
-                </div>
+
 
                 <div className="premium-features">
                   {mainProduct.features ? mainProduct.features.split('\n').filter(f=>f.trim()).map((feat, idx) => {

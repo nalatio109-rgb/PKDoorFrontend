@@ -53,8 +53,8 @@ const Footer = () => {
           <h3>Liên kết nhanh</h3>
           <ul>
             <li><Link to="/"><ArrowRight size={14} /> Trang chủ</Link></li>
-            <li><Link to="/products"><ArrowRight size={14} /> Sản phẩm</Link></li>
-            <li><Link to="/about"><ArrowRight size={14} /> Tuyển đại lý</Link></li>
+            <li><Link to="/san-pham"><ArrowRight size={14} /> Sản phẩm</Link></li>
+            <li><Link to="/gioi-thieu"><ArrowRight size={14} /> Tuyển đại lý</Link></li>
           </ul>
         </div>
 

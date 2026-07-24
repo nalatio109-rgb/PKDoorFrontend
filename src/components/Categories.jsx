@@ -43,11 +43,16 @@ const Categories = () => {
             const productCode = `${prefix}${num}`;
             
             // Determine custom link destination
-            let linkTo = `/product/${cat._id}`;
-            if (name.toLowerCase().includes('pvc')) {
-              linkTo = '/products/pvc';
-            } else if (name.toLowerCase().includes('composite')) {
-              linkTo = '/products/composite';
+            let linkTo = `/san-pham-chi-tiet/${cat._id}`;
+            const normalize = (str) => (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const normName = normalize(name);
+
+            if (normName.includes('pvc')) {
+              linkTo = '/san-pham/pvc';
+            } else if (normName.includes('composite')) {
+              linkTo = '/san-pham/composite';
+            } else if (normName.includes('ghep thanh') || normName.includes('van go')) {
+              linkTo = '/san-pham/ghep-thanh';
             }
 
             // Parse specifications

@@ -55,7 +55,7 @@ const ProductDetails = () => {
         <div className="container section-padding" style={{ paddingTop: '120px' }}>
           <div className="error-state">
             <h2>{error || "Sản phẩm không tồn tại"}</h2>
-            <Link to="/products" className="back-link">
+            <Link to="/san-pham" className="back-link">
               <ArrowLeft size={20} /> Quay lại danh sách sản phẩm
             </Link>
           </div>
@@ -153,7 +153,31 @@ const ProductDetails = () => {
             {/* Main Product Card */}
             <div className="main-product-card">
               <div className="product-image-box">
-                <img src={activeImage || product.image || "https://via.placeholder.com/400x800"} alt={product.name} />
+                <img src={activeImage || product.image || "https://via.placeholder.com/400x800"} alt={product.name} className="main-product-img" />
+                
+                {product.images && product.images.length > 0 && (
+                  <div className="product-thumbnails-container">
+                    <div className="product-thumbnails-track">
+                      {/* Always include the main image in the thumbnail list */}
+                      <div 
+                        className={`thumbnail-item ${activeImage === product.image ? 'active' : ''}`}
+                        onClick={() => setActiveImage(product.image)}
+                      >
+                        <img src={product.image || "https://via.placeholder.com/100"} alt="Main" />
+                      </div>
+                      
+                      {product.images.map((img, idx) => (
+                        <div 
+                           key={idx} 
+                           className={`thumbnail-item ${activeImage === img ? 'active' : ''}`}
+                           onClick={() => setActiveImage(img)}
+                        >
+                           <img src={img} alt={`Thumb ${idx}`} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="product-info-box">
                 <h3 className="product-title">{product.name}</h3>
@@ -223,7 +247,7 @@ const ProductDetails = () => {
               <p className="acc-desc">
                 Cửa nhựa gỗ Composite của cửa có khóa, bản lề, hít cửa...
               </p>
-              <Link to="/products" className="btn-view-more">Xem thêm</Link>
+              <Link to="/san-pham" className="btn-view-more">Xem thêm</Link>
             </div>
           </div>
         </div>
@@ -265,20 +289,12 @@ const ProductDetails = () => {
           <div className="gallery-carousel">
             <button className="carousel-btn left"><ChevronLeft size={24} /></button>
             <div className="gallery-track">
-              {product.images && product.images.length > 0 ? (
-                product.images.map((img, idx) => (
-                  <div className="gallery-item" key={idx} onClick={() => setActiveImage(img)}>
-                    <img src={img} alt={`Gallery ${idx}`} />
-                  </div>
-                ))
-              ) : (
-                galleryImages.map((img, idx) => (
+                {galleryImages.map((img, idx) => (
                   <div className="gallery-item" key={idx}>
                     <img src={img.src} alt={img.name} />
                     <div className="gallery-name">{img.name}</div>
                   </div>
-                ))
-              )}
+                ))}
             </div>
             <button className="carousel-btn right"><ChevronRight size={24} /></button>
           </div>

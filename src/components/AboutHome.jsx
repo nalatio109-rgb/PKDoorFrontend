@@ -56,7 +56,7 @@ const AboutHome = () => {
               </motion.div>
             </div>
 
-            <Link to="/about" className="btn-more">
+            <Link to="/gioi-thieu" className="btn-more">
               Tìm hiểu thêm về chúng tôi <ArrowRight size={20} />
             </Link>
           </motion.div>

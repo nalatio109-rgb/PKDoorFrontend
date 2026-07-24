@@ -20,7 +20,7 @@ const Cart = () => {
         let message = "Chào PK DOOR, tôi muốn nhận báo giá cho các sản phẩm sau:\n\n";
         
         cartItems.forEach((item, index) => {
-            message += `${index + 1}. ${item.name} - SL: ${item.quantity}\n`;
+            message += `${index + 1}. ${item.name} ${item.selectedColor ? `(Màu: ${item.selectedColor})` : ''} - SL: ${item.quantity}\n`;
             message += `   Giá: ${item.price > 0 ? Number(item.price).toLocaleString() + 'đ' : 'Liên hệ'}\n\n`;
         });
         
@@ -71,20 +71,21 @@ const Cart = () => {
                                 </div>
                             ) : (
                                 cartItems.map(item => (
-                                    <div key={item._id} className="cart-item">
+                                    <div key={item.cartItemId || item._id} className="cart-item">
                                         <div className="item-img">
                                             <img src={item.image} alt={item.name} />
                                         </div>
                                         <div className="item-details">
                                             <h3>{item.name}</h3>
+                                            {item.selectedColor && <p className="item-color" style={{ fontSize: '0.8rem', color: '#64748b', margin: '2px 0 4px' }}>Màu: <strong style={{ color: '#1a2a40' }}>{item.selectedColor}</strong></p>}
                                             <p className="item-price">{item.price > 0 ? `${Number(item.price).toLocaleString()}đ` : 'Liên hệ'}</p>
                                             <div className="item-controls">
                                                 <div className="quantity-box">
-                                                    <button onClick={() => updateQuantity(item._id, -1)}><Minus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.cartItemId || item._id, -1)}><Minus size={14} /></button>
                                                     <span>{item.quantity}</span>
-                                                    <button onClick={() => updateQuantity(item._id, 1)}><Plus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.cartItemId || item._id, 1)}><Plus size={14} /></button>
                                                 </div>
-                                                <button className="remove-btn" onClick={() => removeFromCart(item._id)}>
+                                                <button className="remove-btn" onClick={() => removeFromCart(item.cartItemId || item._id)}>
                                                     <Trash2 size={16} />
                                                 </button>
                                             </div>
@@ -101,7 +102,7 @@ const Cart = () => {
                                     <span className="total-amount">{cartTotal > 0 ? `${cartTotal.toLocaleString()}đ` : 'Liên hệ'}</span>
                                 </div>
                                 <Link 
-                                    to="/cart" 
+                                    to="/gio-hang" 
                                     className="view-full-cart-btn" 
                                     onClick={() => setIsCartOpen(false)}
                                 >

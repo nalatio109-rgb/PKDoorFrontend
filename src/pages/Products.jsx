@@ -144,7 +144,7 @@ const Products = () => {
                   transition={{ duration: 0.3 }}
                 />
               {/* Thumbnails */}
-              <div className="product-thumbnails" style={{ display: 'flex', gap: '10px', marginTop: '15px', justifyContent: 'center', flexWrap: 'wrap', padding: '0 20px', paddingBottom: '20px' }}>
+              <div className="product-thumbnails" style={{ display: 'flex', gap: '10px', marginTop: '15px', justifyContent: 'flex-start', flexWrap: 'nowrap', padding: '5px', paddingBottom: '15px', overflowX: 'auto', maxWidth: '100%' }}>
                 {Array.from(new Set([mainProduct.image, ...(mainProduct.images || [])].filter(Boolean))).map((img, idx) => (
                   <img 
                     key={idx}
@@ -153,16 +153,19 @@ const Products = () => {
                     style={{ 
                       width: '60px', 
                       height: '60px', 
+                      minWidth: '60px',
                       objectFit: 'cover', 
                       borderRadius: '8px',
                       cursor: 'pointer',
                       border: activeColorIndex === idx ? '3px solid var(--primary-color)' : '1px solid #ddd',
                       opacity: activeColorIndex === idx ? 1 : 0.6,
-                      transition: 'all 0.3s ease'
+                      transition: 'all 0.3s ease',
+                      flexShrink: 0
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
                       setActiveImage(img);
                       setActiveColorIndex(idx);
+                      e.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                     }}
                   />
                 ))}
@@ -178,7 +181,14 @@ const Products = () => {
                 <h3 className="premium-title">{mainProduct.name}</h3>
 
                 <div className="premium-colors">
-                  <span className="color-label">Màu sắc thịnh hành:</span>
+                  <span className="color-label" style={{ marginBottom: '15px' }}>
+                    Màu sắc đang chọn:{' '}
+                    <strong style={{ color: '#d11f26', marginLeft: '5px', fontSize: '1.05rem' }}>
+                      {mainProduct.colors 
+                        ? (mainProduct.colors.split(',')[activeColorIndex] ? mainProduct.colors.split(',')[activeColorIndex].split(':')[0].trim() : `Màu ${activeColorIndex + 1}`)
+                        : `Màu ${activeColorIndex + 1}`}
+                    </strong>
+                  </span>
                   <div className="color-options">
                     {mainProduct.colors ? mainProduct.colors.split(',').map((c, i) => {
                       const parts = c.split(':');
@@ -192,8 +202,7 @@ const Products = () => {
                               boxShadow: activeColorIndex === i ? `0 0 0 3px #fff, 0 0 0 5px ${parts[1].trim()}` : 'none',
                               transform: activeColorIndex === i ? 'scale(1.2)' : 'none',
                               cursor: 'pointer',
-                              transition: 'all 0.2s ease',
-                              margin: activeColorIndex === i ? '0 5px' : '0'
+                              transition: 'all 0.2s ease'
                             }} 
                             title={parts[0].trim()}
                             onClick={() => {
@@ -217,8 +226,7 @@ const Products = () => {
                             boxShadow: activeColorIndex === i ? `0 0 0 3px #fff, 0 0 0 5px ${color}` : 'none',
                             transform: activeColorIndex === i ? 'scale(1.2)' : 'none',
                             cursor: 'pointer',
-                            transition: 'all 0.2s ease',
-                            margin: activeColorIndex === i ? '0 5px' : '0'
+                            transition: 'all 0.2s ease'
                           }} 
                           onClick={() => {
                             setActiveColorIndex(i);
@@ -278,8 +286,16 @@ const Products = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={(e) => {
-                    addToCart(mainProduct);
-                    flyToCart(e, mainProduct.image);
+                    let selectedColorName = `Màu ${activeColorIndex + 1}`;
+                    if (mainProduct.colors) {
+                      const colors = mainProduct.colors.split(',');
+                      if (colors[activeColorIndex]) {
+                        selectedColorName = colors[activeColorIndex].split(':')[0].trim();
+                      }
+                    }
+                    const imgToCart = activeImage || mainProduct.image;
+                    addToCart({ ...mainProduct, image: imgToCart, selectedColor: selectedColorName });
+                    flyToCart(e, imgToCart);
                   }}
                 >
                   <span className="btn-text">ĐẶT HÀNG NGAY</span>
@@ -292,7 +308,7 @@ const Products = () => {
             <div className="recommended-accessories">
               <div className="rec-header">
                 <h3>Phụ kiện khuyên dùng</h3>
-                <Link to="/products" className="view-all-link">Xem tất cả <ChevronRight size={16} /></Link>
+                <Link to="/san-pham" className="view-all-link">Xem tất cả <ChevronRight size={16} /></Link>
               </div>
               <div className="rec-items-grid">
                 <div className="rec-item-card">

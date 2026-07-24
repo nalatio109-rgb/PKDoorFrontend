@@ -258,7 +258,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <button className="btn-contact-about" onClick={() => navigate('/contact')}>
+            <button className="btn-contact-about" onClick={() => navigate('/lien-he')}>
               Đăng ký hợp tác đại lý ngay <ArrowRight size={20} />
             </button>
           </motion.div>

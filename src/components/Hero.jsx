@@ -33,14 +33,14 @@ const Hero = () => {
             <div className="hero-btns">
               <motion.button 
                 className="btn-primary hero-btn-premium" 
-                onClick={() => navigate('/products')}
+                onClick={() => navigate('/san-pham')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="btn-text">Xem sản phẩm <ArrowRight size={20} /></span>
                 <div className="btn-shine"></div>
               </motion.button>
-              <button className="btn-secondary" onClick={() => navigate('/contact')}>
+              <button className="btn-secondary" onClick={() => navigate('/lien-he')}>
                 Liên hệ tư vấn
               </button>
             </div>

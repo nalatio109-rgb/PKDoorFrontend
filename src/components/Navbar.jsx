@@ -30,20 +30,20 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
 
         <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><Link to="/">TRANG CHỦ</Link></li>
-          <li><Link to="/about">VỀ CHÚNG TÔI</Link></li>
+          <li><Link to="/gioi-thieu">VỀ CHÚNG TÔI</Link></li>
           <li className="dropdown">
             <a href="#!" onClick={(e) => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
               SẢN PHẨM <ChevronDown size={16} />
             </a>
             <ul className="dropdown-menu">
-              <li><Link to="/products/composite">CỬA NHỰA GỖ COMPOSITE</Link></li>
-              <li><Link to="/products/pvc">PHÔI CỬA NHỰA PVC</Link></li>
-              <li><Link to="/products/ghep-thanh">CỬA NHỰA GHÉP THANH VÂN GỖ</Link></li>
+              <li><Link to="/san-pham/composite">CỬA NHỰA GỖ COMPOSITE</Link></li>
+              <li><Link to="/san-pham/pvc">PHÔI CỬA NHỰA PVC</Link></li>
+              <li><Link to="/san-pham/ghep-thanh">CỬA NHỰA GHÉP THANH VÂN GỖ</Link></li>
             </ul>
           </li>
 
           {/* <li><Link to="/news">TIN TỨC</Link></li> */}
-          <li><Link to="/contact">LIÊN HỆ</Link></li>
+          <li><Link to="/lien-he">LIÊN HỆ</Link></li>
         </ul>
 
         <div className="nav-actions">
@@ -55,7 +55,7 @@ const Navbar = ({ darkTheme = false, alwaysSolid = false }) => {
             </div>
           </a>
 
-          <Link to="/cart" className="cart-toggle-btn">
+          <Link to="/gio-hang" className="cart-toggle-btn">
             <ShoppingBag size={24} />
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Link>

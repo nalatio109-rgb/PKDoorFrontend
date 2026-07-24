@@ -41,7 +41,8 @@ const CartPage = () => {
                     name: item.name,
                     price: item.price,
                     quantity: item.quantity,
-                    image: item.image
+                    image: item.image,
+                    selectedColor: item.selectedColor
                 })),
                 totalAmount: cartTotal
             };
@@ -90,7 +91,7 @@ const CartPage = () => {
                         <div className="empty-icon-box">🛒</div>
                         <h2>Giỏ hàng của bạn đang trống</h2>
                         <p>Hãy tham khảo các mẫu cửa mới nhất của chúng tôi</p>
-                        <Link to="/products" className="btn-shop-now">
+                        <Link to="/san-pham" className="btn-shop-now">
                             Xem sản phẩm <ArrowLeft size={18} style={{ transform: 'rotate(180deg)' }} />
                         </Link>
                     </motion.div>
@@ -105,26 +106,27 @@ const CartPage = () => {
                             
                             <div className="items-list">
                                 {cartItems.map(item => (
-                                    <div key={item._id} className="cart-page-item">
+                                    <div key={item.cartItemId || item._id} className="cart-page-item">
                                         <div className="item-image">
                                             <img src={item.image} alt={item.name} />
                                         </div>
                                         <div className="item-info">
                                             <h4>{item.name}</h4>
+                                            {item.selectedColor && <p className="item-color" style={{ fontSize: '0.85rem', color: '#64748b', margin: '4px 0' }}>Màu sắc: <strong style={{ color: '#1a2a40' }}>{item.selectedColor}</strong></p>}
                                             <p className="item-price-unit">{item.price > 0 ? `${Number(item.price).toLocaleString()}đ` : 'Liên hệ'}</p>
                                             <div className="item-controls-row">
                                                 <div className="quantity-selector">
-                                                    <button onClick={() => updateQuantity(item._id, -1)}><Minus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.cartItemId || item._id, -1)}><Minus size={14} /></button>
                                                     <span>{item.quantity}</span>
                                                     <button 
-                                                        onClick={() => updateQuantity(item._id, 1)}
+                                                        onClick={() => updateQuantity(item.cartItemId || item._id, 1)}
                                                         disabled={item.quantity >= item.stock}
                                                         className={item.quantity >= item.stock ? 'disabled' : ''}
                                                     >
                                                         <Plus size={14} />
                                                     </button>
                                                 </div>
-                                                <button className="remove-item-link" onClick={() => removeFromCart(item._id)}>
+                                                <button className="remove-item-link" onClick={() => removeFromCart(item.cartItemId || item._id)}>
                                                     <Trash2 size={16} /> Xóa
                                                 </button>
                                             </div>
@@ -136,7 +138,7 @@ const CartPage = () => {
                                 ))}
                             </div>
 
-                            <Link to="/products" className="continue-shopping">
+                            <Link to="/san-pham" className="continue-shopping">
                                 <ArrowLeft size={16} /> Tiếp tục chọn thêm sản phẩm
                             </Link>
                         </div>
